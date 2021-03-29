@@ -8,14 +8,14 @@ import {MatPaginator} from '@angular/material/paginator';
 @Component({
   selector: 'app-table-produits',
   templateUrl: './table-produits.component.html',
-  styleUrls: ['./table-produits.component.css']
+  styleUrls: ['./table-produits.component.scss']
 })
 
 
 export class TableProduitsComponent implements OnInit {
   @Input() products: Product[];
   dataSource: MatTableDataSource<Product>;
-  displayedColumns = ['idProduct','name','description','price','stock'];
+  displayedColumns = ['idProduct','name','description','price','star'];
   constructor() {
   }
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -31,6 +31,14 @@ export class TableProduitsComponent implements OnInit {
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  onEdit(product: Product): void{
+
+  }
+
+  onDelete(product: Product): void {
+
   }
 
 }

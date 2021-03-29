@@ -28,6 +28,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { TableProduitsComponent } from './components/produits/table-produits/table-produits.component';
 
 import { MatInputModule } from '@angular/material/input';
+import {MatMenuModule} from '@angular/material/menu';
 
 
 
@@ -60,6 +61,7 @@ import { MatInputModule } from '@angular/material/input';
     MatSortModule,
     MatFormFieldModule,
     MatInputModule,
+    MatMenuModule,
   ],
   exports: [
   ],

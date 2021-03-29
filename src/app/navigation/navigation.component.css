@@ -9,7 +9,7 @@
 }
 
 .toolbar {
-  height: 64px;
+  height: 50px;
   /* position: fixed;
   z-index: 100; */
   width: 100%  !important;
@@ -24,6 +24,7 @@
 
   mat-sidenav-content{
     height: 100%;
+
     display: flex;
     flex-flow: column;
   }
