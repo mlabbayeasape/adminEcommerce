@@ -15,7 +15,7 @@ import {MatPaginator} from '@angular/material/paginator';
 export class TableProduitsComponent implements OnInit {
   @Input() products: Product[];
   dataSource: MatTableDataSource<Product>;
-  displayedColumns = ['idProduct','name','description','price','star'];
+  displayedColumns = ['idProduct','name','description','price','stock','star'];
   constructor() {
   }
   @ViewChild(MatPaginator) paginator: MatPaginator;

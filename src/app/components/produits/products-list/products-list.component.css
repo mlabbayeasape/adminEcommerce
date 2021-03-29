@@ -1,1 +1,8 @@
-
+.page-entete{
+  margin: 0;
+  height: 50px;
+  background-color: lightgray;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 50;
+}
