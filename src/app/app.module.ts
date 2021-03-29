@@ -20,15 +20,14 @@ import { NavigationComponent } from './navigation/navigation.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatButtonModule } from '@angular/material/button';
 import { MatListModule } from '@angular/material/list';
-
-
+import {MatFormFieldModule} from '@angular/material/form-field';
 import { HttpClientModule } from '@angular/common/http';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { TableProduitsComponent } from './components/produits/table-produits/table-produits.component';
 
-
+import { MatInputModule } from '@angular/material/input';
 
 
 
@@ -59,6 +58,8 @@ import { TableProduitsComponent } from './components/produits/table-produits/tab
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
+    MatFormFieldModule,
+    MatInputModule,
   ],
   exports: [
   ],

@@ -1,0 +1,23 @@
+
+
+mat-table {
+
+  overflow: auto;
+  min-height: 500px;
+  max-height: 500px;
+  overflow: auto;
+}
+
+mat-cell{
+  padding: 10px;
+}
+
+.description {
+  color: gray;
+}
+
+
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}

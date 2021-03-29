@@ -1,7 +1,13 @@
-<div class="mat-elevation-z8">
+
+
+  <mat-form-field appearance="outline">
+    <mat-label>Rechercher</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Rechercher...">
+  </mat-form-field>
+  <div class="mat-elevation-z8">
   <mat-table #table [dataSource]="dataSource">
 
-    <!-- Position Column -->
+    <!-- id Column -->
     <ng-container matColumnDef="idProduct">
       <mat-header-cell *matHeaderCellDef>Id.</mat-header-cell>
       <mat-cell *matCellDef="let element">
@@ -9,7 +15,39 @@
       </mat-cell>
     </ng-container>
 
-    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <!-- name Column -->
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef>Libellé</mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        {{element.name}}
+      </mat-cell>
+    </ng-container>
+
+       <!-- description Column -->
+       <ng-container matColumnDef="description">
+        <mat-header-cell *matHeaderCellDef>Description</mat-header-cell>
+        <mat-cell class="description" *matCellDef="let element">
+          {{element.description}}
+        </mat-cell>
+      </ng-container>
+
+       <!-- price Column -->
+       <ng-container matColumnDef="price">
+        <mat-header-cell *matHeaderCellDef>Prix</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          {{element.price}} €
+        </mat-cell>
+      </ng-container>
+
+        <!-- stock Column -->
+        <ng-container matColumnDef="stock">
+          <mat-header-cell *matHeaderCellDef>Stock</mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            {{element.price}}
+          </mat-cell>
+        </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns" sticky:true></mat-header-row>
     <mat-row *matRowDef="let attempt; columns: displayedColumns;"
              class="contact"
              matRipple
@@ -17,14 +55,6 @@
     </mat-row>
 
   </mat-table>
+  <mat-paginator [pageSizeOptions]="[10, 50, 100]" showFirstLastButtons></mat-paginator>
 
-  <!-- <mat-paginator [length]="5"
-              [pageSize]="5"
-              [pageSizeOptions]="[5, 10, 25, 100]">
-</mat-paginator> -->
 </div>
-<<<<<<< HEAD
-
-{{lesProduits | json}}
-=======
->>>>>>> 7709b86f16452a20f10e5ec7b4aecf4838bc459b

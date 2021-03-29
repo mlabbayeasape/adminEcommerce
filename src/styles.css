@@ -3,5 +3,8 @@
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.la-page{
+  height: calc(100% - 64px);
+  margin: 10px;
+   /* background-color: red;  */
+}
