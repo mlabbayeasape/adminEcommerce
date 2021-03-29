@@ -1,4 +1,4 @@
-<mat-sidenav-container class="sidenav-container">
+<mat-sidenav-container >
   <mat-sidenav #drawer class="sidenav"
       fixedInViewport="false"
       [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
@@ -25,10 +25,9 @@
       <span>to-do-list</span>
     </mat-toolbar>
     <!-- Add Content Here -->
-    <div class="module-container">
 
     <router-outlet></router-outlet>
-    </div>
+
   </mat-sidenav-content>
 
 </mat-sidenav-container>
