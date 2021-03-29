@@ -17,20 +17,15 @@ import {MatPaginator} from '@angular/material/paginator';
 
 
 export class TableProduitsComponent implements OnInit {
-  @Input() products: Product[];
-
+  @Input('products') products: Product[];
   dataSource: MatTableDataSource<Product>;
-  displayedColumns = ['idProduct', 'name', 'description', 'price'];
+  displayedColumns = ['idProduct'];
   constructor() {
-    console.log(this.products);
-    this.dataSource = new MatTableDataSource(this.products);
-
-    console.log(this.dataSource.data);
   }
 
   ngOnInit(): void {
-
-     console.log(this.dataSource.data);
+    console.log(this.products);
+    this.dataSource = new MatTableDataSource(this.products);
   }
 }
 
