@@ -15,25 +15,6 @@ import {MatPaginator} from '@angular/material/paginator';
   styleUrls: ['./table-produits.component.css']
 })
 
-// export class TableProduitsComponent implements AfterViewInit, OnInit {
-//   @Input() products: Product[];
-//   displayedColumns: string[] = ['idProduct', 'name', 'price'];
-//   dataSource = new MatTableDataSource<Product>([]);
-
-//   @ViewChild(MatPaginator) paginator: MatPaginator;
-
-// ngOnInit(){
-//    this.dataSource = new MatTableDataSource<Product>(this.products);
-//    this.dataSource.data = this.products;
-// }
-
-//   ngAfterViewInit() {
-
-
-//     this.dataSource.paginator = this.paginator;
-//   }
-
-// }
 
 export class TableProduitsComponent implements OnInit {
   @Input() products: Product[];
@@ -43,6 +24,7 @@ export class TableProduitsComponent implements OnInit {
   constructor() {
     console.log(this.products);
     this.dataSource = new MatTableDataSource(this.products);
+
     console.log(this.dataSource.data);
   }
 
