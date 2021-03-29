@@ -1,0 +1,25 @@
+<div class="mat-elevation-z8">
+  <mat-table #table [dataSource]="dataSource">
+
+    <!-- Position Column -->
+    <ng-container matColumnDef="idProduct">
+      <mat-header-cell *matHeaderCellDef>Id.</mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        {{element.idProduct}}
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let attempt; columns: displayedColumns;"
+             class="contact"
+             matRipple
+    >
+    </mat-row>
+
+  </mat-table>
+
+  <!-- <mat-paginator [length]="5"
+              [pageSize]="5"
+              [pageSizeOptions]="[5, 10, 25, 100]">
+</mat-paginator> -->
+</div>
