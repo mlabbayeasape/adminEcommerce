@@ -1,33 +1,8 @@
-.component{
-  top: 64px;
-}
-
-.table-container{
-
-  /* max-height: 500px;
-  overflow: auto; */
-
-}
-
-.mat-elevation-z8{
-
-}
-mat-table{
-
-}
-
-mat-header-cell {
-  background-color: #393939;
-  color: white;
-  padding: 10px;
-}
-
-
 table {
   width: 100%;
 }
 
-td.mat-column-actions {
+td.mat-column-star {
   width: 20px;
   padding-right: 8px !important;
 }
@@ -41,6 +16,10 @@ td.mat-column-actions {
 }
 .mat-row a:hover {
   text-decoration: underline;
+}
+
+.mat-cell {
+  padding-right: 20px;
 }
 
 .mat-form-field {
@@ -58,7 +37,7 @@ td.mat-column-actions {
     box-shadow: none;
   }
 
-  mat-header-row {
+  .mat-header-row {
     display: none;
   }
 
@@ -67,60 +46,65 @@ td.mat-column-actions {
     width: 100%;
   }
 
-  mat-table {
+  .mat-table {
     background: transparent;
-
   }
-    mat-row {
-      display: block;
-      overflow: hidden;
-      height: auto;
-      position: relative;
-      clear: both;
-      box-shadow: 0 2px 1px -1px rgba(0, 0, 0, 0.2),
-        0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 1px 3px 0 rgba(0, 0, 0, 0.12);
-      background-color: #fff;
-      border-radius: 3px;
-      margin-top: 4px;
-
-    }
-
-    mat-cell {
-      display: block;
-      width: 100%;
-      padding: 0 6px;
-      margin: 6px 0;
-      border: 0 none;
-    }
-      mat-cell .first-child {
-        padding: 0 18px 0 6px;
-
-      }
-
-
-      mat-cell .m-card-sub-title {
-        margin-top: -8px;
-        padding: 0 18px 0 6px;
-        color: rgba(0, 0, 0, 0.54);
-      }
-
-
-    mat-column-actions {
-      width: auto;
-      padding: 8px 0 0 !important;
-      margin: 0;
-      position: absolute;
-      top: 0;
-      right: 0;
-    }
-      mat-column-actions:before {
-        display: none;
-      }
-
-
-
-  mat-paginator {
+  .mat-table * {
+    box-sizing: border-box;
+  }
+  .mat-table .mat-row {
+    display: block;
+    overflow: hidden;
+    height: auto;
+    position: relative;
+    clear: both;
+    box-shadow: 0 2px 1px -1px rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 1px 3px 0 rgba(0, 0, 0, 0.12);
+    background-color: #fff;
+    border-radius: 3px;
+  }
+  .mat-table .mat-row + .mat-row {
     margin-top: 24px;
   }
+  .mat-table .mat-cell {
+    display: block;
+    width: 100%;
+    padding: 0 16px;
+    margin: 16px 0;
+    border: 0 none;
+  }
+  .mat-table .mat-cell:first-child {
+    padding: 0 48px 0 16px;
+  }
+  .mat-table .mat-cell:first-child a {
+    font-size: 20px;
+    color: inherit;
+  }
+  .mat-table .mat-cell:first-child:before {
+    display: none;
+  }
+  .mat-table .mat-cell.m-card-sub-title {
+    margin-top: -8px;
+    padding: 0 8px 0 16px;
+    color: rgba(211, 0, 0, 0.925);
+  }
+  .mat-table .has_label_on_mobile:before {
+    content: attr(data-label);
+    display: inline;
+    font-weight: normal;
+  }
+  .mat-table .mat-column-star {
+    width: auto;
+    padding: 8px 0 0 !important;
+    margin: 0;
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+  .mat-table .mat-column-star:before {
+    display: none;
+  }
 
+  .mat-paginator {
+    margin-top: 24px;
+  }
 }

@@ -1,5 +1,6 @@
 table {
   width: 100%;
+
 }
 
 td.mat-column-star {
@@ -19,6 +20,10 @@ td.mat-column-star {
     }
   }
 }
+
+.mat-cell {
+  padding-right: 20px;
+ }
 
 .mat-form-field {
   font-size: 14px;
@@ -84,7 +89,7 @@ td.mat-column-star {
       &.m-card-sub-title {
         margin-top: -8px;
         padding: 0 48px 0 16px;
-        color: rgba(0,0,0,.54);
+        color: rgba(211, 0, 0, 0.925);
       }
     }
 

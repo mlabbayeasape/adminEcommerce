@@ -8,7 +8,7 @@ import {MatPaginator} from '@angular/material/paginator';
 @Component({
   selector: 'app-table-produits',
   templateUrl: './table-produits.component.html',
-  styleUrls: ['./table-produits.component.scss']
+  styleUrls: ['./table-produits.component.css']
 })
 
 
