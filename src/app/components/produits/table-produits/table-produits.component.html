@@ -1,11 +1,21 @@
-<mat-form-field>
-  <mat-label>Filter</mat-label>
-  <input matInput (keyup)="applyFilter($event)" placeholder="recherche..." #input>
-</mat-form-field>
+<div class="actions">
 
-<div class="example-container mat-elevation-z8">
+<button mat-flat-button color="primary" (click)="addProduct()"><mat-icon>add</mat-icon> Ajouter</button>
+</div>
+
+<div class="example-container">
+  <mat-form-field >
+    <mat-label>Filter</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="recherche..." #input>
+  </mat-form-field>
   <div class="example-table-container">
     <table mat-table [dataSource]="dataSource" matSort>
+
+      <ng-container matColumnDef="disclaimer">
+        <td mat-header-cell *matHeaderCellDef colspan="4">
+          Please note that the cost of items displayed are completely and totally made up.
+        </td>
+      </ng-container>
 
       <!-- Position Column -->
       <ng-container matColumnDef="idProduct">
@@ -47,6 +57,8 @@
         </td>
       </ng-container>
 
+
+
       <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: false"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
@@ -69,3 +81,6 @@
     <span>Supprimer</span>
   </button>
 </mat-menu>
+
+<!-- Popup Add or Edit -->
+

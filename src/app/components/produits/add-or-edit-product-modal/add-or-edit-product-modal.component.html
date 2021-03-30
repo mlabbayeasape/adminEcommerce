@@ -1,1 +1,51 @@
-<p>add-or-edit-product-modal works!</p>
+<h1>{{ product ? 'Edit' : 'Add Product' }}</h1>
+
+<mat-vertical-stepper [linear]='false' #stepper>
+  <form [formGroup]="productForm">
+  <mat-step>
+      <ng-template matStepLabel>Information Obligatoires</ng-template>
+      <div formGroupName="productInfos">
+        <mat-form-field appearance="outlined">
+          <mat-label>Libellé</mat-label>
+          <input matInput formControlName="name">
+        </mat-form-field>
+        <mat-form-field appearance="outlined">
+          <mat-label>Catégorie</mat-label>
+          <mat-select>
+            <mat-option value="one">First option</mat-option>
+            <mat-option value="two">Second option</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="outlined">
+          <mat-label>Prix</mat-label>
+          <input matInput formControlName="price">
+        </mat-form-field>
+        <mat-form-field appearance="outlined">
+          <mat-label>Stock</mat-label>
+          <input matInput formControlName="stock">
+        </mat-form-field>
+      <div>
+        <button type="button" mat-button matStepperNext>Next</button>
+      </div>
+    </div>
+  </mat-step>
+
+  <mat-step>
+    <ng-template matStepLabel>Image</ng-template>
+    <div formGroupName="illustration">
+      <mat-form-field appearance="outlined">
+        <mat-label>Image</mat-label>
+        <input matInput name="image" formControlName="image">
+      </mat-form-field>
+    <div>
+      <button type="button" mat-button matStepperPrevious>Back</button>
+      <button mat-button (click)="stepper.reset()">Reset</button>
+    </div>
+  </div>
+  </mat-step>
+</form>
+</mat-vertical-stepper>
+
+
+

@@ -1,3 +1,34 @@
+.actions{
+  display:  flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: baseline ;
+  align-content: center;
+  justify-content: flex-end;
+  margin: 0;
+  margin-bottom: 20px;
+  padding: 5px 5px 5px 5px;
+  vertical-align: middle;
+  line-height: 60px;
+  /*background-color: white;*/
+  border-radius: 8px;
+  button {
+    flex: 0 0 inherit;
+    margin-right: 5px;
+  }
+}
+
+.mat-header-row {
+  background-color: lightgrey;
+  color: white;
+}
+
+
+.example-container{
+  background-color: white;
+  border-radius: 8px;
+}
+
 table {
   width: 100%;
 }
@@ -22,8 +53,11 @@ td.mat-column-star {
 }
 
 .mat-form-field {
+  margin-top: 2px;
   font-size: 14px;
+  padding: 0px 6px 0px 6px;
   width: 100%;
+
 }
 
 .mat-icon {

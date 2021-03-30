@@ -3,6 +3,8 @@ import { Product } from 'src/app/models/product';
 import { MatTableDataSource } from '@angular/material/table';
 
 import {MatPaginator} from '@angular/material/paginator';
+import { MatDialog } from '@angular/material/dialog';
+import { AddOrEditProductModalComponent } from '../add-or-edit-product-modal/add-or-edit-product-modal.component';
 
 
 @Component({
@@ -14,9 +16,10 @@ import {MatPaginator} from '@angular/material/paginator';
 
 export class TableProduitsComponent implements OnInit {
   @Input() products: Product[];
+  productModalOpen: boolean = false;
   dataSource: MatTableDataSource<Product>;
   displayedColumns = ['idProduct','name','description','price','stock','star'];
-  constructor() {
+  constructor(public dialog: MatDialog) {
   }
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
@@ -34,12 +37,26 @@ export class TableProduitsComponent implements OnInit {
   }
 
   onEdit(product: Product): void{
-
+    this.productModalOpen = true;
   }
 
   onDelete(product: Product): void {
 
   }
+
+  addProduct(): void{
+    let dialogRef = this.dialog.open(AddOrEditProductModalComponent, {
+      width: '250px',
+      data: {  }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+
+    });
+  }
+
+
 
 }
 

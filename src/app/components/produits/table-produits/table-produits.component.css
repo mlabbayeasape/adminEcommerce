@@ -1,3 +1,15 @@
+.actions{
+  display:  inline-flex;
+  margin: 0;
+  margin-bottom: 20px;
+  padding: 0px 10px 0px 10px;
+  vertical-align: middle;
+  line-height: 60px;
+  background-color: lightgreen;
+}
+
+
+
 table {
   width: 100%;
 }
