@@ -46,8 +46,7 @@ export class TableProduitsComponent implements OnInit {
 
   addProduct(): void{
     let dialogRef = this.dialog.open(AddOrEditProductModalComponent, {
-      width: '250px',
-      data: {  }
+      width: '800px',
     });
 
     dialogRef.afterClosed().subscribe(result => {
