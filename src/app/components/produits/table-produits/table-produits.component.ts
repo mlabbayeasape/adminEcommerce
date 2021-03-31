@@ -13,7 +13,7 @@ import { AddOrEditProductModalComponent } from '../add-or-edit-product-modal/add
   styleUrls: ['./table-produits.component.scss']
 })
 
-
+//toto
 export class TableProduitsComponent implements OnInit {
   @Input() products: Product[];
   productModalOpen: boolean = false;
