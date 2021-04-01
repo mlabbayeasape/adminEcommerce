@@ -2,9 +2,10 @@
 
 <button mat-flat-button color="primary" (click)="addProduct()"><mat-icon>add</mat-icon> Ajouter</button>
 </div> -->
-<mat-form-field >
-  <mat-label>Filter</mat-label>
-  <input matInput (keyup)="applyFilter($event)" placeholder="recherche..." #input>
+<mat-form-field appearance="outline">
+  <mat-label>Recherche</mat-label>
+  <input matInput (keyup)="applyFilter($event)" #input>
+  <mat-icon matSuffix>search</mat-icon>
 </mat-form-field>
 <div class="example-container">
 

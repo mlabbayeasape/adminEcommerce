@@ -25,7 +25,7 @@ export class AddOrEditProductModalComponent implements OnInit, OnDestroy {
         descrition: ['',Validators.required],
         price: ['',Validators.required],
         stock: ['',Validators.required],
-        category: ['',Validators.required]
+        category: ['',Validators.required],
       }),
       illustration: fb.group({
         image: ['',Validators.required]

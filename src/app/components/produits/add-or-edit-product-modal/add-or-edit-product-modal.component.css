@@ -1,0 +1,11 @@
+.productInfos{
+  display: flex;
+  flex-direction: column;
+  column-gap: 10px;
+}
+
+.illustration{
+  display: flex;
+  flex-direction: column;
+  column-gap: 10px;
+}

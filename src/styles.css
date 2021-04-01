@@ -16,6 +16,10 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; height:100%
   padding: 10px;
   text-align: right;
   border-bottom: 1px solid lightgray;
+  display:inline-flex;
+  flex-direction: row-reverse;
+  column-gap: 10px;
+  width: 100%;
 
 }
 

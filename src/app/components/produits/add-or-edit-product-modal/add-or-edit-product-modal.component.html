@@ -6,17 +6,20 @@
     <form [formGroup]="productForm">
     <mat-step>
         <ng-template matStepLabel>Information Obligatoires</ng-template>
-        <div formGroupName="productInfos">
+        <div formGroupName="productInfos" class="productInfos">
           <mat-form-field appearance="outline">
             <mat-label>Libellé</mat-label>
             <input matInput formControlName="name">
           </mat-form-field>
-          <!-- <mat-form-field appearance="outline">
+
+          <!-- Category -->
+          <mat-form-field appearance="outline">
             <mat-label>Catégorie</mat-label>
-            <mat-select *ngFor="let category of categories" formControlName="category">
-              <mat-option value="category.idCategory">{{category.name}}</mat-option>
+            <mat-select formControlName="category">
+              <mat-option value="">Choix...</mat-option>
+              <mat-option *ngFor="let category of categories" value="category.idCategory">{{category.name}}</mat-option>
             </mat-select>
-          </mat-form-field> -->
+          </mat-form-field>
 
           <mat-form-field appearance="outline">
             <mat-label>Prix</mat-label>
@@ -26,22 +29,24 @@
             <mat-label>Stock</mat-label>
             <input matInput formControlName="stock">
           </mat-form-field>
-        <div>
-          <button type="button" mat-stroked-button matStepperNext>Suivant</button>
-        </div>
+
+      </div>
+      <div>
+        <button type="button" mat-stroked-button matStepperNext>Suivant</button>
       </div>
     </mat-step>
 
     <mat-step>
       <ng-template matStepLabel>Image</ng-template>
-      <div formGroupName="illustration">
+      <div formGroupName="illustration" class="productInfos">
         <mat-form-field appearance="outline">
           <mat-label>Image</mat-label>
           <input matInput name="image" formControlName="image">
         </mat-form-field>
-      <div>
-        <button type="button" mat-stroked-button matStepperPrevious>Précédent</button>
-      </div>
+
+    </div>
+    <div>
+      <button type="button" mat-stroked-button matStepperPrevious>Précédent</button>
     </div>
     </mat-step>
   </form>
