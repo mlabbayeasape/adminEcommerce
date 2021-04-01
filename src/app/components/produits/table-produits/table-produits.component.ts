@@ -55,8 +55,6 @@ export class TableProduitsComponent implements OnInit {
     });
   }
 
-
-
 }
 
 
