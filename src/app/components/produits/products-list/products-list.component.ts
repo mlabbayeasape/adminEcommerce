@@ -2,6 +2,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Response } from 'src/app/models/response';
 import { ProductsService } from 'src/app/services/products.service';
 import { Product } from 'src/app/models/product';
+import { MatDialog } from '@angular/material/dialog';
+import { AddOrEditProductModalComponent } from '../add-or-edit-product-modal/add-or-edit-product-modal.component';
 
 @Component({
   selector: 'app-products-list',
@@ -12,10 +14,11 @@ import { Product } from 'src/app/models/product';
 
 export class ProductsListComponent implements OnInit {
 
-  constructor(private productServices: ProductsService) { }
+  constructor(private productServices: ProductsService, public dialog: MatDialog) { }
 
   products;
   productsSub;
+  productModalOpen: boolean = false;
 
   ngOnInit(): void {
     this.productsSub = this.productServices.getProducts().subscribe(
@@ -26,8 +29,15 @@ export class ProductsListComponent implements OnInit {
     )
   }
 
-  addProduct(){
+  addProduct(): void{
+    let dialogRef = this.dialog.open(AddOrEditProductModalComponent, {
+      width: '800px',
+    });
 
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+
+    });
   }
 
 }

@@ -4,10 +4,11 @@
     aria-label="Toggle sidenav"
     mat-icon-button
     (click)="drawer.toggle()"
-    *ngIf="isHandset$ | async">
+
+    >
     <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
   </button>
-  <span>to-do-list</span>
+  <span>Asape GRC</span>
 </mat-toolbar>
 <mat-sidenav-container class="main-sidenav-container">
   <mat-sidenav #drawer

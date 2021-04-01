@@ -1,7 +1,8 @@
-<!-- <div class="page-entete">
-  <button mat-raised-button color="primary" color="primary" (click)="addProduct()">+ Ajouter</button>
-</div> -->
+<div class="div-actions">
+  <button mat-flat-button color="primary" (click)="addProduct()"><mat-icon>add</mat-icon> Ajouter</button>
+</div>
 
-
+<div class="div-contenu">
   <app-table-produits [products]="products" *ngIf="products && products.length"></app-table-produits>
+</div>
 

@@ -35,14 +35,17 @@
 .example-container{
   background-color: white;
   border-radius: 8px;
+
 }
 
 table {
   width: 100%;
+
   .mat-icon {
     color: #4391AC;
   }
 }
+
 
 td.mat-column-star {
   width: 20px;
@@ -113,6 +116,9 @@ padding-right: 10px;
       border-radius: 3px;
       + .mat-row {
         margin-top: 24px;
+      }
+      a{
+        font-weight: 500;
       }
     }
 
