@@ -1,5 +1,16 @@
-<mat-sidenav-container >
-  <mat-sidenav #drawer class="sidenav"
+<mat-toolbar  color="primary" role="heading">
+  <button
+    type="button"
+    aria-label="Toggle sidenav"
+    mat-icon-button
+    (click)="drawer.toggle()"
+    *ngIf="isHandset$ | async">
+    <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+  </button>
+  <span>to-do-list</span>
+</mat-toolbar>
+<mat-sidenav-container class="main-sidenav-container">
+  <mat-sidenav #drawer
       fixedInViewport="false"
       [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
       [mode]="(isHandset$ | async) ? 'over' : 'side'"
@@ -12,22 +23,9 @@
       <a mat-button routerLink="contact">Clients</a>
     </mat-nav-list>
   </mat-sidenav>
-  <mat-sidenav-content>
-    <mat-toolbar class="toolbar" color="primary">
-      <button
-        type="button"
-        aria-label="Toggle sidenav"
-        mat-icon-button
-        (click)="drawer.toggle()"
-        *ngIf="isHandset$ | async">
-        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
-      </button>
-      <span>to-do-list</span>
-    </mat-toolbar>
-    <!-- Add Content Here -->
-
+  <div class="div-scrollable">
     <router-outlet></router-outlet>
-
-  </mat-sidenav-content>
-
+  </div>
 </mat-sidenav-container>
+
+

@@ -5,9 +5,7 @@
   padding: 0px 10px 0px 10px;
   vertical-align: middle;
   line-height: 60px;
-  background-color: lightgreen;
 }
-
 
 
 table {
@@ -23,7 +21,7 @@ td.mat-column-star {
   background-color: #e9f3ff;
 }
 .mat-row a {
-  color: #3e75ff;
+  /*color: #3e75ff;*/
   text-decoration: none;
 }
 .mat-row a:hover {
@@ -40,7 +38,7 @@ td.mat-column-star {
 }
 
 .mat-icon {
-  color: #3e75ff;
+  color: red;
 }
 
 @media screen and (max-width: 960px) {

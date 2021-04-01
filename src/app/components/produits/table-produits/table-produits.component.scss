@@ -1,3 +1,7 @@
+.mat-icon{
+  color: white;
+}
+
 .actions{
   display:  flex;
   flex-direction: row;
@@ -15,14 +19,18 @@
   button {
     flex: 0 0 inherit;
     margin-right: 5px;
+
   }
 }
 
 .mat-header-row {
-  background-color: lightgrey;
+  background-color: #4391AC;
   color: white;
 }
 
+.mat-header-cell {
+  color: white;
+}
 
 .example-container{
   background-color: white;
@@ -31,6 +39,9 @@
 
 table {
   width: 100%;
+  .mat-icon {
+    color: #4391AC;
+  }
 }
 
 td.mat-column-star {
@@ -60,9 +71,7 @@ td.mat-column-star {
 
 }
 
-.mat-icon {
-  color: #3e75ff;
-}
+
 
 .mat-cell {
 padding-right: 10px;
