@@ -48,4 +48,10 @@ export class AddOrEditProductModalComponent implements OnInit, OnDestroy {
   ngOnDestroy(){
     this.categorySub.unsubscribe();
   }
+
+  idCategory = null;
+  selectCategory(id:number) {
+    this.idCategory = id;
+  }
+
 }

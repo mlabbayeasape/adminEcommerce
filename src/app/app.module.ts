@@ -34,7 +34,7 @@ import {MatMenuModule} from '@angular/material/menu';
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatSelectModule} from '@angular/material/select';
 import { ReactiveFormsModule } from '@angular/forms';
-
+import {MatCardModule} from '@angular/material/card';
 
 @NgModule({
   declarations: [
@@ -68,6 +68,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatStepperModule,
     MatSelectModule,
     ReactiveFormsModule,
+    MatCardModule,
   ],
   exports: [
   ],

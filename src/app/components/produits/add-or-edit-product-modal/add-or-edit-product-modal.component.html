@@ -4,6 +4,24 @@
 <div mat-dialog-content>
   <mat-vertical-stepper [linear]='false' #stepper>
     <form [formGroup]="productForm">
+
+      <mat-step>
+        <ng-template matStepLabel>Categorie</ng-template>
+        <div formGroupName="productInfos" class="lescategories">
+        <mat-card *ngFor="let category of categories" [ngClass]="{'card-selected mat-elevation-z2': category.idCategory == idCategory}" (click)="selectCategory(category.idCategory)">
+          <span class="selection">
+            <mat-icon>check_circle</mat-icon>
+          </span>
+          <!-- <mat-icon>{{category.icon}}</mat-icon>  -->
+          {{category.name}}
+        </mat-card>
+      </div>
+      <div>
+
+        <button type="button" mat-stroked-button matStepperNext>Suivant</button>
+      </div>
+      </mat-step>
+
     <mat-step>
         <ng-template matStepLabel>Information Obligatoires</ng-template>
         <div formGroupName="productInfos" class="productInfos">
@@ -12,14 +30,18 @@
             <input matInput formControlName="name">
           </mat-form-field>
 
+
           <!-- Category -->
-          <mat-form-field appearance="outline">
+          <!-- <mat-form-field appearance="outline">
             <mat-label>Catégorie</mat-label>
-            <mat-select formControlName="category">
+            <mat-select formControlName="category" value="" (valueChange)="selectCategory()" [ngClass]="">
               <mat-option value="">Choix...</mat-option>
-              <mat-option *ngFor="let category of categories" value="category.idCategory">{{category.name}}</mat-option>
+              <mat-option *ngFor="let category of categories" value="category.idCategory">{{category.name}}
+              </mat-option>
             </mat-select>
-          </mat-form-field>
+          </mat-form-field> -->
+
+
 
           <mat-form-field appearance="outline">
             <mat-label>Prix</mat-label>
@@ -32,6 +54,7 @@
 
       </div>
       <div>
+        <button type="button" mat-stroked-button matStepperPrevious>Précédent</button>
         <button type="button" mat-stroked-button matStepperNext>Suivant</button>
       </div>
     </mat-step>
