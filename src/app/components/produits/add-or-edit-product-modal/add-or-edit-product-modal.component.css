@@ -24,6 +24,10 @@ mat-card{
   border-radius: 4px;
   cursor: pointer;
 }
+:host ::ng-deep .mat-radio-container {
+  display: none;
+}
+
 mat-card:hover {
   opacity: 1;
   border: 2px solid #283593;

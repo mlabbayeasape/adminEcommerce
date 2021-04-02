@@ -1,11 +1,12 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit, Output,EventEmitter ,Inject} from '@angular/core';
 import { FormBuilder, FormGroup, NG_VALUE_ACCESSOR, Validators } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
 import { Category } from 'src/app/models/category';
 import { Product } from 'src/app/models/product';
 import { CategoriesService } from 'src/app/services/categories.service';
 import {STEPPER_GLOBAL_OPTIONS} from '@angular/cdk/stepper';
+
 
 @Component({
   selector: 'app-add-or-edit-product-modal',
@@ -18,18 +19,24 @@ import {STEPPER_GLOBAL_OPTIONS} from '@angular/cdk/stepper';
 export class AddOrEditProductModalComponent implements OnInit, OnDestroy {
 
   @Input() product: Product;
+  @Output() finish= new EventEmitter();
   productForm: FormGroup; // initialise un formulaire
   categories: Category[];
   categorySub: Subscription;
 
-  constructor(private fb: FormBuilder, public dialogRef: MatDialogRef<AddOrEditProductModalComponent>, private categoriesService: CategoriesService) {
+
+  constructor(private fb: FormBuilder,
+    public dialogRef: MatDialogRef<AddOrEditProductModalComponent>,
+    private categoriesService: CategoriesService,
+    @Inject(MAT_DIALOG_DATA) public data: Product) {
+
     this.productForm = fb.group({
-      // productCategory: fb.group({
-      //   category: [0,Validators.required],
-      // }),
+      productCategory: fb.group({
+        category: [0,Validators.required],
+      }),
       productInfos: fb.group({
         name: ['',Validators.required],
-        descrition: ['',Validators.required],
+        //descrition: ['',Validators.required],
         price: ['',Validators.required],
         stock: ['',Validators.required],
       }),
@@ -63,16 +70,6 @@ export class AddOrEditProductModalComponent implements OnInit, OnDestroy {
     // this.productForm.controls.productCategory.get('category').setValue(id);
     // console.log(this.productForm.controls.productCategory.get('category').value);
   }
-  selectCategory2(id: string) {
-    //this.productForm.controls.productCategory.get('category').setValue(id);
-
-     console.log("1 - "+this.productForm.controls.productCategory.valid);
-     console.log("2 - "+this.productForm.controls.productInfos.valid);
-     console.log("3 - "+this.productForm.controls.illustration.valid);
-
-  }
-
-
 
   //** controle des formulaires **/
   get isCategoryInvalid(): boolean {  // le get devant sert a dire qu'on peut utiliser la fonction comme attribut
@@ -84,5 +81,28 @@ export class AddOrEditProductModalComponent implements OnInit, OnDestroy {
   get isIllustrationInvalid(): boolean {
     return this.productForm.get('illustration').invalid;
   }
+
+  close(){
+    this.productForm.reset();
+    this.idCategory = null;
+  }
+
+  handleCancel(){
+    this.finish.emit();
+    this.close();
+
+  }
+
+  handleFinish(){
+    const product = {
+      ...this.productForm.get('productInfos').value,
+      ...this.productForm.get('illustration').value,
+      ...this.productForm.get('productCategory').value
+    }
+
+  this.finish.emit(product);
+  this.close();
+}
+
 
 }
