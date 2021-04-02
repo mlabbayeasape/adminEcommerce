@@ -2,28 +2,49 @@
 
 <h1 mat-dialog-title>{{ product ? 'Edit' : 'Add Product' }}</h1>
 <div mat-dialog-content>
-  <mat-vertical-stepper [linear]='false' #stepper>
+  <mat-vertical-stepper linear='false' #stepper>
     <form [formGroup]="productForm">
 
-      <mat-step>
+      <!-- STEP category -->
+      <!-- <mat-step [stepControl]="productForm" errorMessage="*champ(s) manquant(s)">
         <ng-template matStepLabel>Categorie</ng-template>
-        <div formGroupName="productInfos" class="lescategories">
-        <mat-card *ngFor="let category of categories" [ngClass]="{'card-selected mat-elevation-z2': category.idCategory == idCategory}" (click)="selectCategory(category.idCategory)">
+        <div formGroupName="productCategory" class="lescategories">
+        <mat-card value="" *ngFor="let category of categories" [ngClass]="{'card-selected mat-elevation-z2': category.idCategory == idCategory}" (click)="selectCategory(category.idCategory)">
           <span class="selection">
             <mat-icon>check_circle</mat-icon>
           </span>
-          <!-- <mat-icon>{{category.icon}}</mat-icon>  -->
           {{category.name}}
         </mat-card>
       </div>
       <div>
-
         <button type="button" mat-stroked-button matStepperNext>Suivant</button>
       </div>
-      </mat-step>
+      </mat-step> -->
 
-    <mat-step>
-        <ng-template matStepLabel>Information Obligatoires</ng-template>
+      <!-- <mat-step [stepControl]="productForm" errorMessage="*champ(s) manquant(s)">
+        <ng-template matStepLabel>Categorie</ng-template>
+        <div formGroupName="productCategory" class="lescategories">
+          <mat-radio-group  formControlName="category" [(ngModel)]="selectedCategory"  >
+            <mat-radio-button *ngFor="let category of categories" [value]="category.idCategory" (change)="selectCategory2(category.idCategory)">
+              <mat-card>
+                <span class="selection">
+                  <mat-icon>check_circle</mat-icon>
+                </span>
+                {{category.name}} -  {{category.idCategory}}
+              </mat-card>
+            </mat-radio-button>
+          </mat-radio-group>
+
+    </div>
+    <div>
+      <button type="button" mat-stroked-button matStepperNext>Suivant</button>
+    </div>
+    </mat-step> -->
+
+
+     <!-- STEP Informations -->
+    <mat-step [stepControl]="productForm" errorMessage="*champ(s) manquant(s)">
+        <ng-template matStepLabel>Informations</ng-template>
         <div formGroupName="productInfos" class="productInfos">
           <mat-form-field appearance="outline">
             <mat-label>Libellé</mat-label>
@@ -42,7 +63,7 @@
           </mat-form-field> -->
 
 
-
+          <!-- STEP Informations -->
           <mat-form-field appearance="outline">
             <mat-label>Prix</mat-label>
             <input matInput formControlName="price">
@@ -59,7 +80,7 @@
       </div>
     </mat-step>
 
-    <mat-step>
+    <mat-step [stepControl]="productForm" errorMessage="*champ(s) manquant(s)">
       <ng-template matStepLabel>Image</ng-template>
       <div formGroupName="illustration" class="productInfos">
         <mat-form-field appearance="outline">

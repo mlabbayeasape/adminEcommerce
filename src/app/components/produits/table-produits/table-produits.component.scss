@@ -4,12 +4,13 @@
 
 
 .mat-header-row {
-  background-color: #4391AC;
-  color: white;
+  // background-color: #4391AC;
+
 }
 
 .mat-header-cell {
   color: white;
+  color: #4391AC;
 }
 
 .example-container{
@@ -47,13 +48,11 @@ td.mat-column-star {
   font-size: 14px;
   padding: 0px 6px 0px 6px;
   width: 100%;
-
 }
-
-
 
 .mat-cell {
 padding-right: 10px;
+width: auto;
 }
 
 .m-card-sub-title {
