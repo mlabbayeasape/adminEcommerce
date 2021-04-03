@@ -42,13 +42,12 @@ export class ProductsListComponent implements OnInit {
       width: '800px',
       data: this.products[2]
 
-
     });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed ');
        this.productRetour = result;
-       console.log(this.productRetour);
+       console.log(result);
     });
   }
 
