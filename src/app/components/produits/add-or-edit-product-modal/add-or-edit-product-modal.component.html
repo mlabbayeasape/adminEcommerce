@@ -1,4 +1,5 @@
 
+{{data | json}}
 
 <h1 mat-dialog-title>{{ product ? 'Edit' : 'Add Product' }}</h1>
 {{data.name}}
@@ -32,7 +33,7 @@
         <ng-template matStepLabel>Informations</ng-template>
         <div formGroupName="productInfos" class="productInfos">
           <mat-form-field appearance="outline">
-            <mat-label>Libellé</mat-label>
+            <mat-label>Libellé {{data.name}}</mat-label>
             <input matInput formControlName="name" [(ngModel)]="data.name">
           </mat-form-field>
 
@@ -84,7 +85,7 @@
 </div>
 <div mat-dialog-actions>
   <button mat-raised-button color="warn" (click)="handleCancel()">Annuler</button>
-  <button mat-raised-button color="primary" [mat-dialog-close]="data" [disabled]="!productForm.valid" (click)="handleFinish()" cdkFocusInitial>Valider</button>
+  <button mat-raised-button color="primary" [mat-dialog-close]="data" [disabled]="!productForm.valid"  cdkFocusInitial>Valider</button>
 </div>
 
 

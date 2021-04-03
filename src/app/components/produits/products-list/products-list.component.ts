@@ -44,11 +44,17 @@ export class ProductsListComponent implements OnInit {
 
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed ');
-       this.productRetour = result;
-       console.log(result);
-    });
+    // dialogRef.afterClosed().subscribe(result => {
+    //   console.log('The dialog was closed ');
+    //    this.productRetour = result.data;
+    //    console.log(result);
+    // });
+    dialogRef.afterClosed().subscribe((submit) => {
+     console.log(JSON.stringify(submit));
+      if (submit) {
+        this.productRetour = submit;
+      }
+    })
   }
 
 }

@@ -29,7 +29,6 @@ export class AddOrEditProductModalComponent implements OnInit, OnDestroy {
     public dialogRef: MatDialogRef<AddOrEditProductModalComponent>,
     private categoriesService: CategoriesService,
     @Inject(MAT_DIALOG_DATA) public data: Product) {
-
     this.productForm = fb.group({
       productCategory: fb.group({
         category: [0,Validators.required],
