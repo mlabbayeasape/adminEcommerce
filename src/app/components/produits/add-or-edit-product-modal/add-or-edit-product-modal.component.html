@@ -1,5 +1,4 @@
 
-{{data | json}}
 
 <h1 mat-dialog-title>{{ data ? 'Edit' : 'Add Product' }}</h1>
 {{data.name}}
@@ -62,10 +61,25 @@
     <mat-step [stepControl]="productForm.get('illustration')" errorMessage="*champ(s) manquant(s)">
       <ng-template matStepLabel>Image</ng-template>
       <div formGroupName="illustration" class="productInfos">
-        <mat-form-field appearance="outline">
+        <!-- <mat-form-field appearance="outline">
           <mat-label>Image</mat-label>
-          <input matInput name="image" formControlName="image">
-        </mat-form-field>
+          <input matInput type="file" name="image" formControlName="image">
+
+        </mat-form-field> -->
+         <!-- <app-file-input allowMultiple="false" removeButtonLabel="Remove Applications" ></app-file-input> -->
+         <div class="container">
+          <input type="file"  formControlName="image" style="display: none" #fileInput accept="image/*" (change)="onChangeFileInput()" />
+          <button mat-raised-button color="primary" class="file-select-button" (click)="onClickFileInputButton()">
+            <mat-icon>attach_file</mat-icon>
+            Choisir un fichier...
+          </button>
+
+          <p class="file-name" *ngIf="!file; else fileName">Aucun fichier choisi</p>
+          <ng-template #fileName>
+            <p class="file-name">{{ file?.name }}</p>
+          </ng-template>
+        </div>
+
 
     </div>
     <div>

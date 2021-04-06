@@ -25,12 +25,12 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; height:100%
 
 /* notification */
 snack-bar-container.success {
-  background-color: rgba(0, 128, 0, 0.5);
+  background-color: rgba(0, 128, 0, 0.8);
   color : #fff;
 }
 
 snack-bar-container.warn {
-  background-color: rgba(255, 0, 0, 0.5);
+  background-color: rgba(255, 0, 0, 0.8);
   color : #fff;
 }
 

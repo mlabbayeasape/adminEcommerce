@@ -9,7 +9,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { AddOrEditProductModalComponent } from './components/produits/add-or-edit-product-modal/add-or-edit-product-modal.component';
 import { DeleteProductModalComponent } from './components/produits/delete-product-modal/delete-product-modal.component';
 import { ProductsListComponent} from './components/produits/products-list/products-list.component'
-//import { ListeProduitsComponent} from './components/produits/liste-produits/liste-produits.component';
+
 
 
 import { CommonModule } from '@angular/common';
@@ -37,6 +37,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import {MatCardModule} from '@angular/material/card';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+
+
 
 @NgModule({
   declarations: [
@@ -73,6 +75,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     MatCardModule,
     MatRadioModule,
     MatSnackBarModule,
+
   ],
   exports: [
   ],

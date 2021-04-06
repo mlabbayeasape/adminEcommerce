@@ -17,7 +17,7 @@ import { NotificationService } from 'src/app/services/notification.service';
 //toto
 export class TableProduitsComponent implements OnInit {
   @Input() products: Product[];
-  productModalOpen: boolean = false;
+
   dataSource: MatTableDataSource<Product>;
   displayedColumns = ['idProduct','name','description','price','stock','star'];
   constructor(public dialog: MatDialog,
@@ -29,7 +29,6 @@ export class TableProduitsComponent implements OnInit {
     this.dataSource.paginator = this.paginator;
   }
   ngOnInit(): void {
-    console.log(this.products);
     this.dataSource = new MatTableDataSource(this.products);
   }
 
@@ -38,11 +37,9 @@ export class TableProduitsComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  onEdit(product: Product): void{
-    this.productModalOpen = true;
-  }
 
-  onDelete(product: Product): void {
+
+  onDelete(leProduit: Product): void {
 
   }
 
@@ -54,8 +51,8 @@ export class TableProduitsComponent implements OnInit {
     dialogRef.afterClosed().subscribe((retour) => {
       if (retour) {
         //MODIF
-        this.notificationService.success('Modification effectuée :'+JSON.stringify(retour));
-        console.log(JSON.stringify(retour));
+        console.log(JSON.stringify(retour))
+        this.notificationService.success('Modification effectuée'+JSON.stringify(retour));
       } else {
         this.notificationService.success('Modification annulée');
       }

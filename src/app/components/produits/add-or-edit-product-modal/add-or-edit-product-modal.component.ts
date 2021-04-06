@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit, Output,EventEmitter ,Inject} from '@angular/core';
+import { Component, Input, OnDestroy, OnInit, Output,EventEmitter ,Inject, ViewChild} from '@angular/core';
 import { FormBuilder, FormGroup, NG_VALUE_ACCESSOR, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
@@ -18,8 +18,10 @@ import {STEPPER_GLOBAL_OPTIONS} from '@angular/cdk/stepper';
 })
 export class AddOrEditProductModalComponent implements OnInit, OnDestroy {
 
-  //@Input() product: Product;
-  //@Output() finish= new EventEmitter();
+  @ViewChild('fileInput')
+  fileInput;
+  file: File | null = null;
+
   productForm: FormGroup; // initialise un formulaire
   categories: Category[];
   categorySub: Subscription;
@@ -105,6 +107,14 @@ export class AddOrEditProductModalComponent implements OnInit, OnDestroy {
     this.dialogRef.close(product);
   }
 
+  onClickFileInputButton(): void {
+    this.fileInput.nativeElement.click();
+  }
+
+  onChangeFileInput(): void {
+    const files: { [key: string]: File } = this.fileInput.nativeElement.files;
+    this.file = files[0];
+  }
 
   // this.finish.emit(product);
   // this.close();

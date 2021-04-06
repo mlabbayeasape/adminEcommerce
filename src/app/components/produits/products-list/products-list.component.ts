@@ -13,11 +13,8 @@ import { NotificationService } from 'src/app/services/notification.service';
 })
 
 
-
-
-
 export class ProductsListComponent implements OnInit {
-
+  public handleChange(e: Event) {}
   constructor(private productServices: ProductsService,
     public dialog: MatDialog,
     private notificationService: NotificationService) {  }
@@ -34,7 +31,6 @@ export class ProductsListComponent implements OnInit {
     this.productsSub = this.productServices.getProducts().subscribe(
       (response: Response)=>{
         this.products = response.result;
-        console.log(this.products)
       },
       (error)=>{console.log(error)},
     )
@@ -57,21 +53,21 @@ export class ProductsListComponent implements OnInit {
     )
   }
 
-  editProduct(leProduit: Product): void{
-    let dialogRef = this.dialog.open(AddOrEditProductModalComponent, {
-      width: '800px',
-      data: leProduit
-    });
-    dialogRef.afterClosed().subscribe((retour) => {
-      if (retour) {
-        //MODIF
-        this.notificationService.success(':: Modification effectuée');
-        console.log(JSON.stringify(retour));
-      } else {
-        console.log("annulé")
-      }
-    }
-    )
-  }
+  // editProduct(leProduit: Product): void{
+  //   let dialogRef = this.dialog.open(AddOrEditProductModalComponent, {
+  //     width: '800px',
+  //     data: leProduit
+  //   });
+  //   dialogRef.afterClosed().subscribe((retour) => {
+  //     if (retour) {
+  //       //MODIF
+  //       this.notificationService.success(':: Modification effectuée');
+  //       console.log(JSON.stringify(retour));
+  //     } else {
+  //       console.log("annulé")
+  //     }
+  //   }
+  //   )
+  // }
 
 }
