@@ -103,6 +103,9 @@ export class AddOrEditProductModalComponent implements OnInit, OnDestroy {
       ...this.productForm.get('productInfos').value,
       ...this.productForm.get('illustration').value
     }
+    if(this.file){
+      product.image = this.file.name
+    }
     console.log("formvalue"+product);
     this.dialogRef.close(product);
   }
@@ -111,10 +114,12 @@ export class AddOrEditProductModalComponent implements OnInit, OnDestroy {
     this.fileInput.nativeElement.click();
   }
 
-  onChangeFileInput(): void {
-    const files: { [key: string]: File } = this.fileInput.nativeElement.files;
-    this.file = files[0];
+  onChangeFileInput(event): void {
+    this.file = event.target.files[0];
+
   }
+
+
 
   // this.finish.emit(product);
   // this.close();

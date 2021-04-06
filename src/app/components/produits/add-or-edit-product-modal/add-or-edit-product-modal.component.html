@@ -68,7 +68,7 @@
         </mat-form-field> -->
          <!-- <app-file-input allowMultiple="false" removeButtonLabel="Remove Applications" ></app-file-input> -->
          <div class="container">
-          <input type="file"  formControlName="image" style="display: none" #fileInput accept="image/*" (change)="onChangeFileInput()" />
+          <input type="file"  formControlName="image" style="display: none" #fileInput accept="image/*" (change)="onChangeFileInput($event)" />
           <button mat-raised-button color="primary" class="file-select-button" (click)="onClickFileInputButton()">
             <mat-icon>attach_file</mat-icon>
             Choisir un fichier...

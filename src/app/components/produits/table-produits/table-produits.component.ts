@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, AfterViewInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, AfterViewInit, ViewChild, SimpleChanges, SimpleChange } from '@angular/core';
 import { Product } from 'src/app/models/product';
 import { MatTableDataSource } from '@angular/material/table';
 
@@ -6,6 +6,7 @@ import {MatPaginator} from '@angular/material/paginator';
 import { MatDialog } from '@angular/material/dialog';
 import { AddOrEditProductModalComponent } from '../add-or-edit-product-modal/add-or-edit-product-modal.component';
 import { NotificationService } from 'src/app/services/notification.service';
+import { last } from 'rxjs/operators';
 
 
 @Component({
@@ -37,7 +38,17 @@ export class TableProduitsComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
+  // ngOnChanges(changes: SimpleChanges) {
+  //   for (let property in changes) {
+  //       if (property == 'products') {
+  //         console.log('Current:', changes[property].currentValue);
+  //       }
+  //   }
+  // }
 
+  onRafraichit(){
+    console.log("on refresh");
+  }
 
   onDelete(leProduit: Product): void {
 
