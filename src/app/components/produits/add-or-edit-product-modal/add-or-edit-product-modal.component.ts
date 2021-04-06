@@ -35,7 +35,7 @@ export class AddOrEditProductModalComponent implements OnInit, OnDestroy {
       }),
       productInfos: fb.group({
         name: [this.data.name,Validators.required],
-        //descrition: ['',Validators.required],
+        description: [this.data.description,Validators.required],
         price: [this.data.price,Validators.required],
         stock: [this.data.stock,Validators.required],
       }),

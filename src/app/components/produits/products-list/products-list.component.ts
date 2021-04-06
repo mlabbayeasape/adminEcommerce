@@ -48,10 +48,10 @@ export class ProductsListComponent implements OnInit {
     dialogRef.afterClosed().subscribe((retour) => {
       if (retour) {
         //AJOUT
-        this.notificationService.success('Ajout effectué');
+        this.notificationService.success('Ajout effectué'+JSON.stringify(retour));
         console.log(JSON.stringify(retour));
       } else {
-        this.notificationService.success('Ajout annulé');
+        this.notificationService.warn('Ajout annulé');
       }
     }
     )

@@ -54,10 +54,10 @@ export class TableProduitsComponent implements OnInit {
     dialogRef.afterClosed().subscribe((retour) => {
       if (retour) {
         //MODIF
-        this.notificationService.success(':: Modification effectuée');
+        this.notificationService.success('Modification effectuée :'+JSON.stringify(retour));
         console.log(JSON.stringify(retour));
       } else {
-        console.log("annulé")
+        this.notificationService.success('Modification annulée');
       }
     }
     )

@@ -38,18 +38,7 @@
           </mat-form-field>
 
 
-          <!-- Category -->
-          <!-- <mat-form-field appearance="outline">
-            <mat-label>Catégorie</mat-label>
-            <mat-select formControlName="category" value="" (valueChange)="selectCategory()" [ngClass]="">
-              <mat-option value="">Choix...</mat-option>
-              <mat-option *ngFor="let category of categories" value="category.idCategory">{{category.name}}
-              </mat-option>
-            </mat-select>
-          </mat-form-field> -->
 
-
-          <!-- STEP Informations -->
           <mat-form-field appearance="outline">
             <mat-label>Prix</mat-label>
             <input matInput formControlName="price">
@@ -57,6 +46,10 @@
           <mat-form-field appearance="outline">
             <mat-label>Stock</mat-label>
             <input matInput formControlName="stock">
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Description</mat-label>
+            <textarea matInput formControlName="description"></textarea>
           </mat-form-field>
 
       </div>
