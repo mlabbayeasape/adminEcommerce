@@ -23,7 +23,7 @@ export class AddOrEditProductModalComponent implements OnInit, OnDestroy {
   productForm: FormGroup; // initialise un formulaire
   categories: Category[];
   categorySub: Subscription;
-
+  selectedCategory: string;
 
   constructor(private fb: FormBuilder,
     public dialogRef: MatDialogRef<AddOrEditProductModalComponent>,
@@ -43,6 +43,7 @@ export class AddOrEditProductModalComponent implements OnInit, OnDestroy {
         image: [this.data.image,Validators.required]
       })
     })
+
   }
 
   ngOnInit(): void {
@@ -51,6 +52,7 @@ export class AddOrEditProductModalComponent implements OnInit, OnDestroy {
         this.categories = reponse.result;
       }
     )
+    this.selectedCategory = this.data.Category;
   }
 
   onNoClick(): void {
@@ -63,10 +65,11 @@ export class AddOrEditProductModalComponent implements OnInit, OnDestroy {
 
   // idCategory = null;
   // selectedCategory: number = null;
-  selectCategory(id: number) {
+  selectCategory(id: string) {
+    //this.data.Category = id;
     // this.idCategory = id;
-    // this.selectedCategory = id;
-    // this.productForm.controls.productCategory.get('category').setValue(id);
+    this.selectedCategory = id;
+    //this.productForm.controls.productCategory.get('category').setValue(id);
     // console.log(this.productForm.controls.productCategory.get('category').value);
   }
 

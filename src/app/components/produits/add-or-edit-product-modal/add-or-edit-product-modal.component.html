@@ -1,3 +1,4 @@
+
 {{data | json}}
 
 <h1 mat-dialog-title>{{ data ? 'Edit' : 'Add Product' }}</h1>
@@ -12,7 +13,7 @@
         <div formGroupName="productCategory" class="lescategories">
           <mat-radio-group  formControlName="category">
             <mat-radio-button *ngFor="let category of categories" [value]="category.idCategory" (change)="selectCategory(category.idCategory)">
-              <mat-card [ngClass]="{'card-selected mat-elevation-z2': category.idCategory == idCategory}">
+              <mat-card [ngClass]="{'card-selected mat-elevation-z2': category.idCategory == selectedCategory}">
                 <span class="selection">
                   <mat-icon>check_circle</mat-icon>
                 </span>
