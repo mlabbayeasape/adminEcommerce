@@ -1,7 +1,7 @@
 
 {{data | json}}
 
-<h1 mat-dialog-title>{{ product ? 'Edit' : 'Add Product' }}</h1>
+<h1 mat-dialog-title>{{ data ? 'Edit' : 'Add Product' }}</h1>
 {{data.name}}
 <div mat-dialog-content>
   <form [formGroup]="productForm">
@@ -11,7 +11,7 @@
       <mat-step [stepControl]="productForm.get('productCategory')" errorMessage="*champ(s) manquant(s)">
         <ng-template matStepLabel>Categorie</ng-template>
         <div formGroupName="productCategory" class="lescategories">
-          <mat-radio-group  formControlName="category" [(ngModel)]="selectedCategory"  >
+          <mat-radio-group  formControlName="category">
             <mat-radio-button *ngFor="let category of categories" [value]="category.idCategory" (change)="selectCategory(category.idCategory)">
               <mat-card [ngClass]="{'card-selected mat-elevation-z2': category.idCategory == idCategory}">
                 <span class="selection">
@@ -33,8 +33,8 @@
         <ng-template matStepLabel>Informations</ng-template>
         <div formGroupName="productInfos" class="productInfos">
           <mat-form-field appearance="outline">
-            <mat-label>Libellé {{data.name}}</mat-label>
-            <input matInput formControlName="name" [(ngModel)]="data.name">
+            <mat-label>Libellé</mat-label>
+            <input matInput formControlName="name">
           </mat-form-field>
 
 
@@ -52,11 +52,11 @@
           <!-- STEP Informations -->
           <mat-form-field appearance="outline">
             <mat-label>Prix</mat-label>
-            <input matInput formControlName="price" [(ngModel)]="data.price">
+            <input matInput formControlName="price">
           </mat-form-field>
           <mat-form-field appearance="outline">
             <mat-label>Stock</mat-label>
-            <input matInput formControlName="stock" [(ngModel)]="data.stock">
+            <input matInput formControlName="stock">
           </mat-form-field>
 
       </div>
@@ -85,7 +85,7 @@
 </div>
 <div mat-dialog-actions>
   <button mat-raised-button color="warn" (click)="handleCancel()">Annuler</button>
-  <button mat-raised-button color="primary" [mat-dialog-close]="data" [disabled]="!productForm.valid"  cdkFocusInitial>Valider</button>
+  <button mat-raised-button color="primary" [disabled]="!productForm.valid" (click)="handleFinish()">Valider</button>
 </div>
 
 

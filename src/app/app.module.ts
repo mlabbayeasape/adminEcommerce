@@ -36,6 +36,7 @@ import {MatSelectModule} from '@angular/material/select';
 import { ReactiveFormsModule } from '@angular/forms';
 import {MatCardModule} from '@angular/material/card';
 import {MatRadioModule} from '@angular/material/radio';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -71,6 +72,7 @@ import {MatRadioModule} from '@angular/material/radio';
     ReactiveFormsModule,
     MatCardModule,
     MatRadioModule,
+    MatSnackBarModule,
   ],
   exports: [
   ],

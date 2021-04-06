@@ -18,8 +18,8 @@ import {STEPPER_GLOBAL_OPTIONS} from '@angular/cdk/stepper';
 })
 export class AddOrEditProductModalComponent implements OnInit, OnDestroy {
 
-  @Input() product: Product;
-  @Output() finish= new EventEmitter();
+  //@Input() product: Product;
+  //@Output() finish= new EventEmitter();
   productForm: FormGroup; // initialise un formulaire
   categories: Category[];
   categorySub: Subscription;
@@ -61,11 +61,11 @@ export class AddOrEditProductModalComponent implements OnInit, OnDestroy {
     this.categorySub.unsubscribe();
   }
 
-  idCategory = null;
-  selectedCategory: number = null;
+  // idCategory = null;
+  // selectedCategory: number = null;
   selectCategory(id: number) {
-    this.idCategory = id;
-    this.selectedCategory = id;
+    // this.idCategory = id;
+    // this.selectedCategory = id;
     // this.productForm.controls.productCategory.get('category').setValue(id);
     // console.log(this.productForm.controls.productCategory.get('category').value);
   }
@@ -83,25 +83,28 @@ export class AddOrEditProductModalComponent implements OnInit, OnDestroy {
 
   close(){
     this.productForm.reset();
-    this.idCategory = null;
+    //this.idCategory = null;
   }
 
   handleCancel(){
-    this.finish.emit();
-    this.close();
+    // this.finish.emit();
+    this.dialogRef.close();
 
   }
 
   handleFinish(){
     const product = {
+      ...this.productForm.get('productCategory').value,
       ...this.productForm.get('productInfos').value,
-      ...this.productForm.get('illustration').value,
-      ...this.productForm.get('productCategory').value
+      ...this.productForm.get('illustration').value
     }
+    console.log("formvalue"+product);
+    this.dialogRef.close(product);
+  }
 
-  this.finish.emit(product);
-  this.close();
+
+  // this.finish.emit(product);
+  // this.close();
 }
 
 
-}

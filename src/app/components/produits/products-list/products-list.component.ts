@@ -4,6 +4,7 @@ import { ProductsService } from 'src/app/services/products.service';
 import { Product } from 'src/app/models/product';
 import { MatDialog } from '@angular/material/dialog';
 import { AddOrEditProductModalComponent } from '../add-or-edit-product-modal/add-or-edit-product-modal.component';
+import { NotificationService } from 'src/app/services/notification.service';
 
 @Component({
   selector: 'app-products-list',
@@ -17,7 +18,9 @@ import { AddOrEditProductModalComponent } from '../add-or-edit-product-modal/add
 
 export class ProductsListComponent implements OnInit {
 
-  constructor(private productServices: ProductsService, public dialog: MatDialog) {  }
+  constructor(private productServices: ProductsService,
+    public dialog: MatDialog,
+    private notificationService: NotificationService) {  }
 
   productRetour: Product;
 
@@ -31,30 +34,44 @@ export class ProductsListComponent implements OnInit {
     this.productsSub = this.productServices.getProducts().subscribe(
       (response: Response)=>{
         this.products = response.result;
+        console.log(this.products)
       },
       (error)=>{console.log(error)},
     )
   }
 
   addProduct(): void{
-
     let dialogRef = this.dialog.open(AddOrEditProductModalComponent, {
       width: '800px',
-      data: this.products[2]
-
+      data: {}
     });
-
-    // dialogRef.afterClosed().subscribe(result => {
-    //   console.log('The dialog was closed ');
-    //    this.productRetour = result.data;
-    //    console.log(result);
-    // });
-    dialogRef.afterClosed().subscribe((submit) => {
-     console.log(JSON.stringify(submit));
-      if (submit) {
-        this.productRetour = submit;
+    dialogRef.afterClosed().subscribe((retour) => {
+      if (retour) {
+        //AJOUT
+        this.notificationService.success('Ajout effectué');
+        console.log(JSON.stringify(retour));
+      } else {
+        this.notificationService.success('Ajout annulé');
       }
-    })
+    }
+    )
+  }
+
+  editProduct(leProduit: Product): void{
+    let dialogRef = this.dialog.open(AddOrEditProductModalComponent, {
+      width: '800px',
+      data: leProduit
+    });
+    dialogRef.afterClosed().subscribe((retour) => {
+      if (retour) {
+        //MODIF
+        this.notificationService.success(':: Modification effectuée');
+        console.log(JSON.stringify(retour));
+      } else {
+        console.log("annulé")
+      }
+    }
+    )
   }
 
 }
