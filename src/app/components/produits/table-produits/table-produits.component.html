@@ -48,7 +48,7 @@
       <ng-container  matColumnDef="star">
         <th mat-header-cell *matHeaderCellDef> </th>
         <td mat-cell *matCellDef="let element" >
-          <button mat-icon-button [matMenuTriggerFor]="menu">
+          <button mat-icon-button [matMenuTriggerFor]="menu" [matMenuTriggerData]="{data: element}">
             <mat-icon>more_vert</mat-icon>
           </button>
         </td>
@@ -69,7 +69,8 @@
     can be found in the LICENSE file at http://angular.io/license -->
 
 <mat-menu #menu="matMenu">
-  <button mat-menu-item>
+  <ng-template matMenuContent let-data="data">
+  <button mat-menu-item (click)="editProduct(data)">
     <mat-icon>open_in_new</mat-icon>
     <span>Modifier</span>
   </button>
@@ -77,6 +78,7 @@
     <mat-icon>delete</mat-icon>
     <span>Supprimer</span>
   </button>
+</ng-template>
 </mat-menu>
 
 <!-- Popup Add or Edit -->

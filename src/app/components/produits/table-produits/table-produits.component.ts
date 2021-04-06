@@ -5,6 +5,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import {MatPaginator} from '@angular/material/paginator';
 import { MatDialog } from '@angular/material/dialog';
 import { AddOrEditProductModalComponent } from '../add-or-edit-product-modal/add-or-edit-product-modal.component';
+import { NotificationService } from 'src/app/services/notification.service';
 
 
 @Component({
@@ -19,7 +20,8 @@ export class TableProduitsComponent implements OnInit {
   productModalOpen: boolean = false;
   dataSource: MatTableDataSource<Product>;
   displayedColumns = ['idProduct','name','description','price','stock','star'];
-  constructor(public dialog: MatDialog) {
+  constructor(public dialog: MatDialog,
+    private notificationService: NotificationService) {
   }
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
@@ -44,15 +46,21 @@ export class TableProduitsComponent implements OnInit {
 
   }
 
-  addProduct(): void{
+  editProduct(leProduit: Product): void{
     let dialogRef = this.dialog.open(AddOrEditProductModalComponent, {
       width: '800px',
+      data: leProduit
     });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-
-    });
+    dialogRef.afterClosed().subscribe((retour) => {
+      if (retour) {
+        //MODIF
+        this.notificationService.success(':: Modification effectuée');
+        console.log(JSON.stringify(retour));
+      } else {
+        console.log("annulé")
+      }
+    }
+    )
   }
 
 }

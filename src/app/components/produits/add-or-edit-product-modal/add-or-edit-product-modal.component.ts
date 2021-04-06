@@ -31,16 +31,16 @@ export class AddOrEditProductModalComponent implements OnInit, OnDestroy {
     @Inject(MAT_DIALOG_DATA) public data: Product) {
     this.productForm = fb.group({
       productCategory: fb.group({
-        category: [0,Validators.required],
+        category: [this.data.Category,Validators.required],
       }),
       productInfos: fb.group({
-        name: ['',Validators.required],
+        name: [this.data.name,Validators.required],
         //descrition: ['',Validators.required],
-        price: ['',Validators.required],
-        stock: ['',Validators.required],
+        price: [this.data.price,Validators.required],
+        stock: [this.data.stock,Validators.required],
       }),
       illustration: fb.group({
-        image: ['',Validators.required]
+        image: [this.data.image,Validators.required]
       })
     })
   }
