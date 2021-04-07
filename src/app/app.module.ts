@@ -37,6 +37,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 import {MatCardModule} from '@angular/material/card';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { ParentComponent } from './components/test/parent/parent.component';
+import { ChildComponent } from './components/test/child/child.component';
+import { PageProduitsComponent } from './components/produits/page-produits/page-produits.component';
 
 
 
@@ -49,6 +52,9 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     NavigationComponent,
     ProductsListComponent,
     TableProduitsComponent,
+    ParentComponent,
+    ChildComponent,
+    PageProduitsComponent,
   ],
   imports: [
     BrowserModule,

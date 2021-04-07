@@ -15,12 +15,7 @@ import { NotificationService } from 'src/app/services/notification.service';
 
 
 export class TableProduitsComponent implements OnInit, OnChanges {
-  private _products: Product[];
-
-  @Input() set products(value) {
-    this._products = value;
-    this.refresh();
-  }
+  @Input() products: Product[]
 
   dataSource: MatTableDataSource<Product>;
   displayedColumns = ['idProduct','name','description','price','stock','star'];
@@ -28,10 +23,10 @@ export class TableProduitsComponent implements OnInit, OnChanges {
   constructor(
     public dialog: MatDialog,
     private notificationService: NotificationService,
-    private changeDetectorRefs: ChangeDetectorRef
   ) {
   }
   @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatTable) table: MatTable<any>;
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
@@ -41,13 +36,16 @@ export class TableProduitsComponent implements OnInit, OnChanges {
   }
 
   refresh(): void {
-    this.dataSource = new MatTableDataSource(this._products);
-    this.changeDetectorRefs.detectChanges();
-    this.changeDetectorRefs.markForCheck();
+    this.dataSource = new MatTableDataSource(this.products);
+
+    console.log("on refresh");
+
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    this.refresh();
+    if (changes['products']) {
+    console.log("ya du changement");
+    }
   }
 
   applyFilter(event: Event) {
@@ -67,7 +65,7 @@ export class TableProduitsComponent implements OnInit, OnChanges {
     dialogRef.afterClosed().subscribe((retour) => {
       if (retour) {
         //MODIF
-        this._products.push(retour);
+        this.products.push(retour);
         this.notificationService.success('Modification effectuée'+JSON.stringify(retour));
         this.refresh();
       } else {

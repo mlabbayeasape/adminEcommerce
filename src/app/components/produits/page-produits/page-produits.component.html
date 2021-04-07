@@ -1,0 +1,84 @@
+<p>page-produits works!</p>
+
+<div class="div-actions">
+  <button mat-mini-fab color="primary" (click)="addProduct()"><mat-icon>print</mat-icon></button>
+  <button mat-mini-fab color="primary" (click)="addProduct()"><mat-icon>add</mat-icon></button>
+</div>
+
+
+<mat-form-field appearance="outline">
+  <mat-label>Recherche</mat-label>
+  <input matInput (keyup)="applyFilter($event)" #input>
+  <mat-icon matSuffix>search</mat-icon>
+</mat-form-field>
+<div class="example-container">
+
+  <div class="example-table-container" *ngIf="dataSource">
+    <table #table mat-table [dataSource]="dataSource" matSort>
+
+      <!-- Position Column -->
+      <ng-container matColumnDef="idProduct">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Code </th>
+        <td mat-cell *matCellDef="let element" class='m-card-title' test data-label='Code'>
+          {{element.idProduct}}</td>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Form type </th>
+        <td mat-cell *matCellDef="let element" class='m-card-title' data-label='Libellé'>
+          <a href='javascript:alert("page article");'>{{element.name}} </a></td>
+      </ng-container>
+      <!-- Weight Column -->
+      <ng-container matColumnDef="description">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Description </th>
+        <td mat-cell *matCellDef="let element" class='m-card-sub-title' data-label='Description'> {{element.description}} </td>
+      </ng-container>
+       <!-- Name Column -->
+       <ng-container matColumnDef="price">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Prix </th>
+        <td mat-cell *matCellDef="let element" class='has_label_on_mobile' data-label='Prix : '> {{element.price}} €</td>
+      </ng-container>
+
+          <!-- Name Column -->
+          <ng-container matColumnDef="stock">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Stock </th>
+            <td mat-cell *matCellDef="let element" class='has_label_on_mobile' data-label='Stock : '> {{element.stock}} </td>
+          </ng-container>
+
+      <!-- Symbol Column -->
+      <ng-container  matColumnDef="star">
+        <th mat-header-cell *matHeaderCellDef> </th>
+        <td mat-cell *matCellDef="let element" >
+          <button mat-icon-button [matMenuTriggerFor]="menu" [matMenuTriggerData]="{data: element}">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: false"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+  <mat-paginator [pageSizeOptions]="[10, 50, 100]"></mat-paginator>
+</div>
+
+
+<!-- Copyright 2018 Google Inc. All Rights Reserved.
+    Use of this source code is governed by an MIT-style license that
+    can be found in the LICENSE file at http://angular.io/license -->
+
+<mat-menu #menu="matMenu">
+  <ng-template matMenuContent let-data="data">
+  <button mat-menu-item (click)="editProduct(data)">
+    <mat-icon>open_in_new</mat-icon>
+    <span>Modifier</span>
+  </button>
+  <button mat-menu-item>
+    <mat-icon>delete</mat-icon>
+    <span>Supprimer</span>
+  </button>
+</ng-template>
+</mat-menu>

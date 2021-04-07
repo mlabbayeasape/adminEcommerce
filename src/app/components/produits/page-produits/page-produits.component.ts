@@ -1,50 +1,61 @@
-import {AfterViewInit, ChangeDetectorRef, Component, Input, OnInit, ViewChild} from '@angular/core';
+import { AfterViewInit, Component, OnInit, SimpleChanges, ViewChild } from '@angular/core';
+import { Product } from 'src/app/models/product';
+import { AddOrEditProductModalComponent } from '../add-or-edit-product-modal/add-or-edit-product-modal.component';
 import { Response } from 'src/app/models/response';
 import { ProductsService } from 'src/app/services/products.service';
-import { Product } from 'src/app/models/product';
 import { MatDialog } from '@angular/material/dialog';
-import { AddOrEditProductModalComponent } from '../add-or-edit-product-modal/add-or-edit-product-modal.component';
 import { NotificationService } from 'src/app/services/notification.service';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+
 
 @Component({
-  selector: 'app-products-list',
-  templateUrl: './products-list.component.html',
-  styleUrls: ['./products-list.component.css']
+  selector: 'app-page-produits',
+  templateUrl: './page-produits.component.html',
+  styleUrls: ['./page-produits.component.css']
 })
+export class PageProduitsComponent implements OnInit , AfterViewInit{
 
+  @ViewChild(MatPaginator) paginator: MatPaginator;
 
-export class ProductsListComponent implements OnInit {
+  dataSource: MatTableDataSource<Product>;
+  displayedColumns = ['idProduct','name','description','price','stock','star'];
+
+  productRetour: Product;
+  products;
+  productsSub;
 
   constructor(private productServices: ProductsService,
     public dialog: MatDialog,
     private notificationService: NotificationService,
-  ) {  }
+    ) { }
 
-  productRetour: Product;
+    ngOnInit(): void {
 
-  //productRetour: Product = <Product>{}
-  products;
-  productsSub;
 
-  tousLesProduits: Product[];
+      }
 
-  ngOnInit(): void {
 
-  this.productsSub = this.productServices.getProducts().subscribe(
-     (response: Response)=>{
-        this.products = response.result;
-        this.tousLesProduits = this.products;
-        this.productsSub.unsubscribe();
-      },
-      (error)=>{console.log(error)},
-    )
+
+      ngAfterViewInit() {
+        this.productsSub = this.productServices.getProducts().subscribe(
+          (response: Response)=>{
+             this.products = response.result;
+             this.dataSource = new MatTableDataSource(this.products);
+             this.dataSource.paginator = this.paginator;
+             this.productsSub.unsubscribe();
+           },
+           (error)=>{console.log(error)},
+         )
+      }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
 
-
- // JE SUIS DANS LE COMPOSANT PARENT, J'AJOUTE UN PRODUIT !!!
-
- addProduct(): void{
+  addProduct(): void{
     let dialogRef = this.dialog.open(AddOrEditProductModalComponent, {
       width: '800px',
       data: {}
@@ -56,9 +67,8 @@ export class ProductsListComponent implements OnInit {
 
         // TEST 1
         //J'insere une ligne dans mon tableau "products"
-        this.tousLesProduits.unshift(retour);
-        console.log(this.tousLesProduits);
-        this.products = this.tousLesProduits;
+        this.products.unshift(retour);
+        this.dataSource.data = this.products;
         // résultat:  ma table ne se met pas à jour (sauf si je modifie le paginator)
 
         // TEST 2
