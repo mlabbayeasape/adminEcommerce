@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild} from '@angular/core';
+import {ChangeDetectorRef, Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild} from '@angular/core';
 import { Product } from 'src/app/models/product';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 
@@ -15,13 +15,21 @@ import { NotificationService } from 'src/app/services/notification.service';
 
 
 export class TableProduitsComponent implements OnInit, OnChanges {
-  @Input() products: Product[];
+  private _products: Product[];
+
+  @Input() set products(value) {
+    this._products = value;
+    this.refresh();
+  }
 
   dataSource: MatTableDataSource<Product>;
   displayedColumns = ['idProduct','name','description','price','stock','star'];
 
-  constructor(public dialog: MatDialog,
-    private notificationService: NotificationService) {
+  constructor(
+    public dialog: MatDialog,
+    private notificationService: NotificationService,
+    private changeDetectorRefs: ChangeDetectorRef
+  ) {
   }
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
@@ -29,14 +37,18 @@ export class TableProduitsComponent implements OnInit, OnChanges {
     this.dataSource.paginator = this.paginator;
   }
   ngOnInit(): void {
-    this.dataSource = new MatTableDataSource(this.products);
+    this.refresh();
+  }
+
+  refresh(): void {
+    this.dataSource = new MatTableDataSource(this._products);
+    this.changeDetectorRefs.detectChanges();
+    this.changeDetectorRefs.markForCheck();
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    //this.dataSource = new MatTableDataSource<Product>(changes.products.currentValue);
-    console.log(changes);
-
-    }
+    this.refresh();
+  }
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -55,14 +67,14 @@ export class TableProduitsComponent implements OnInit, OnChanges {
     dialogRef.afterClosed().subscribe((retour) => {
       if (retour) {
         //MODIF
-        console.log(JSON.stringify(retour))
-        this.products.push(retour);
+        this._products.push(retour);
         this.notificationService.success('Modification effectuée'+JSON.stringify(retour));
+        this.refresh();
       } else {
         this.notificationService.success('Modification annulée');
       }
     }
-    )
+    );
   }
 
 }

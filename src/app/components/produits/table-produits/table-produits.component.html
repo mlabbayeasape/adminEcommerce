@@ -9,7 +9,7 @@
 </mat-form-field>
 <div class="example-container">
 
-  <div class="example-table-container">
+  <div class="example-table-container" *ngIf="dataSource">
     <table #table mat-table [dataSource]="dataSource" matSort>
 
       <!-- Position Column -->

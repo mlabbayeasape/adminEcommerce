@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
+import {AfterViewInit, ChangeDetectorRef, Component, Input, OnInit, ViewChild} from '@angular/core';
 import { Response } from 'src/app/models/response';
 import { ProductsService } from 'src/app/services/products.service';
 import { Product } from 'src/app/models/product';
@@ -23,7 +23,9 @@ export class ProductsListComponent implements OnInit {
   constructor(private productServices: ProductsService,
     public dialog: MatDialog,
     private notificationService: NotificationService,
-    private productService: ProductsService) {  }
+    private productService: ProductsService,
+    private changeDetector: ChangeDetectorRef
+  ) {  }
 
   productRetour: Product;
 
@@ -36,6 +38,7 @@ export class ProductsListComponent implements OnInit {
   this.productsSub = this.productServices.getProducts().subscribe(
      (response: Response)=>{
         this.products = response.result;
+        this.productsSub.unsubscribe();
       },
       (error)=>{console.log(error)},
     )
@@ -55,14 +58,13 @@ export class ProductsListComponent implements OnInit {
 
         // TEST 1
         //J'insere une ligne dans mon tableau "products"
-        this.products.unshift(retour);
+        this.products.push(retour);
         // résultat:  ma table ne se met pas à jour (sauf si je modifie le paginator)
 
         // TEST 2
         // Je modifie le libellé du premier élément de mon tableau "products"
-        this.products[0].name = "Le libellé est modifié et visible dans la table"
+        //this.products[0].name = "Le libellé est modifié et visible dans la table"
         // résultat: le libéllé est bien mis a jour dans la table
-
 
 
 
