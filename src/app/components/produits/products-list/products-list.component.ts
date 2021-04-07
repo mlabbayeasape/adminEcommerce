@@ -41,18 +41,30 @@ export class ProductsListComponent implements OnInit {
     )
   }
 
+ // JE SUIS DANS LE COMPOSANT PARENT, J'AJOUTE UN PRODUIT !!!
 
-  addProduct(): void{
+ addProduct(): void{
     let dialogRef = this.dialog.open(AddOrEditProductModalComponent, {
       width: '800px',
       data: {}
     });
     dialogRef.afterClosed().subscribe((retour: Product) => {
       if (retour) {
-        //AJOUT
+        //TEST AJOUT:
         this.notificationService.success('Ajout effectué'+JSON.stringify(retour));
-        retour.idProduct = 999
+
+        // TEST 1
+        //J'insere une ligne dans mon tableau "products"
         this.products.unshift(retour);
+        // résultat:  ma table ne se met pas à jour (sauf si je modifie le paginator)
+
+        // TEST 2
+        // Je modifie le libellé du premier élément de mon tableau "products"
+        this.products[0].name = "Le libellé est modifié et visible dans la table"
+        // résultat: le libéllé est bien mis a jour dans la table
+
+
+
 
         //******/
         // ICI COMMENT ACTUALISER MA TABLE POUR AFFICHER LE PRODUIT AJOUTé ?????
