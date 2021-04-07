@@ -28,8 +28,7 @@ export class TableProduitsComponent implements OnInit, OnChanges {
     private notificationService: NotificationService) {
   }
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  //@ViewChild(MatTable, { static: true }) table: MatTable<Product>;
-  @ViewChild('table') table: MatTable<Product>;
+
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
   }
@@ -47,8 +46,6 @@ export class TableProduitsComponent implements OnInit, OnChanges {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
-
-
 
   onDelete(leProduit: Product): void {
 
