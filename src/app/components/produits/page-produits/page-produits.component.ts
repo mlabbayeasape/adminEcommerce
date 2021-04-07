@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit, SimpleChanges, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { Product } from 'src/app/models/product';
 import { AddOrEditProductModalComponent } from '../add-or-edit-product-modal/add-or-edit-product-modal.component';
 import { Response } from 'src/app/models/response';
@@ -7,12 +7,13 @@ import { MatDialog } from '@angular/material/dialog';
 import { NotificationService } from 'src/app/services/notification.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
+import { FileUploadService } from 'src/app/services/file-upload.service';
 
 
 @Component({
   selector: 'app-page-produits',
   templateUrl: './page-produits.component.html',
-  styleUrls: ['./page-produits.component.css']
+  styleUrls: ['./page-produits.component.scss']
 })
 export class PageProduitsComponent implements OnInit , AfterViewInit{
 
@@ -24,18 +25,18 @@ export class PageProduitsComponent implements OnInit , AfterViewInit{
   productRetour: Product;
   products;
   productsSub;
+  file: File;
 
   constructor(private productServices: ProductsService,
     public dialog: MatDialog,
     private notificationService: NotificationService,
+    private fileService: FileUploadService,
     ) { }
 
     ngOnInit(): void {
 
 
       }
-
-
 
       ngAfterViewInit() {
         this.productsSub = this.productServices.getProducts().subscribe(
@@ -67,34 +68,44 @@ export class PageProduitsComponent implements OnInit , AfterViewInit{
 
         // TEST 1
         //J'insere une ligne dans mon tableau "products"
-        this.products.unshift(retour);
-        this.dataSource.data = this.products;
-        // résultat:  ma table ne se met pas à jour (sauf si je modifie le paginator)
+        //this.products.unshift(retour);
+       // this.dataSource.data = this.products;
 
-        // TEST 2
-        // Je modifie le libellé du premier élément de mon tableau "products"
-        //this.products[0].name = "Le libellé est modifié et visible dans la table"
-        // résultat: le libéllé est bien mis a jour dans la table
-
-
-
-        //******/
-        // ICI COMMENT ACTUALISER MA TABLE POUR AFFICHER LE PRODUIT AJOUTé ?????
-        //******/
 
         // HTTP PUSH
-        // this.productService.addProduct(retour).subscribe(
-        //   (data) => {
-        //     if(data.status == 200){
-        //     }
-        //   }
-        // )
+        this.productServices.addProduct(retour).subscribe(
+          (data) => {
+            if(data.status == 200){
+              //this.fileService.uploadImage()
+              retour.idProduct = data.args.lastInsertId
+              this.products.unshift(retour);
+              this.dataSource.data = this.products;
+            }
+          }
+        )
 
       } else {
         this.notificationService.warn('Ajout annulé');
       }
     }
     )
+  }
+
+  editProduct(leProduit: Product): void{
+    let dialogRef = this.dialog.open(AddOrEditProductModalComponent, {
+      width: '800px',
+      data: leProduit
+    });
+    dialogRef.afterClosed().subscribe((retour) => {
+      if (retour) {
+        //MODIF
+
+        this.notificationService.success('Modification effectuée'+JSON.stringify(retour));
+      } else {
+        this.notificationService.success('Modification annulée');
+      }
+    }
+    );
   }
 
 }

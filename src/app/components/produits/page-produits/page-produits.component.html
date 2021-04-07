@@ -1,18 +1,15 @@
-<p>page-produits works!</p>
 
 <div class="div-actions">
   <button mat-mini-fab color="primary" (click)="addProduct()"><mat-icon>print</mat-icon></button>
   <button mat-mini-fab color="primary" (click)="addProduct()"><mat-icon>add</mat-icon></button>
 </div>
 
-
+<div class="div-contenu">
 <mat-form-field appearance="outline">
   <mat-label>Recherche</mat-label>
   <input matInput (keyup)="applyFilter($event)" #input>
   <mat-icon matSuffix>search</mat-icon>
 </mat-form-field>
-<div class="example-container">
-
   <div class="example-table-container" *ngIf="dataSource">
     <table #table mat-table [dataSource]="dataSource" matSort>
 
@@ -82,3 +79,4 @@
   </button>
 </ng-template>
 </mat-menu>
+

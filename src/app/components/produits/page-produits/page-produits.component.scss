@@ -1,0 +1,150 @@
+
+mat-paginator{
+  background-color:#F0F0F0;
+}
+
+.mat-header-cell {
+  color: #4391AC;
+  background-color: #4391AC;
+  background-color:#F0F0F0;
+}
+
+.example-container{
+  background-color: white;
+  border-radius: 8px;
+
+}
+
+table {
+  background-color: transparent;
+  width: 100%;
+  .mat-icon{
+    color: #4391AC;
+  }
+}
+
+
+td.mat-column-star {
+  width: 20px;
+  padding-right: 8px !important;
+}
+
+.mat-row {
+  background-color: transparent;
+  &:hover {
+    background-color: #e9f3ff;
+  }
+  a {
+    color: #000000;
+    font-weight: 400;
+    text-decoration: none;
+    &:hover {
+    text-decoration: underline;
+    }
+  }
+}
+
+.mat-form-field {
+  margin-top: 2px;
+  font-size: 14px;
+  padding: 0px 6px 0px 6px;
+  width: 100%;
+}
+
+.mat-cell {
+padding-right: 10px;
+width: auto;
+}
+
+.m-card-sub-title {
+  color: rgba(26, 26, 26, 0.54);
+}
+
+@media screen and (max-width: 960px) {
+  .mat-elevation-z8 {
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .mat-header-row {
+    display: none;
+  }
+
+  tbody {
+    display: block;
+    width: 100%;
+  }
+
+  .mat-table {
+    background: transparent;
+    * {
+      box-sizing: border-box;
+    }
+
+    .mat-row {
+      display: block;
+      overflow: hidden;
+      height: auto;
+      position: relative;
+      clear: both;
+      box-shadow: 0 2px 1px -1px rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 1px 3px 0 rgba(0,0,0,.12);
+      background-color: #fff;
+      border-radius: 3px;
+      + .mat-row {
+        margin-top: 24px;
+      }
+      a{
+        font-weight: 500;
+      }
+    }
+
+    .mat-cell {
+      display: block;
+      width: 100%;
+      padding: 0 16px;
+      margin: 16px 0;
+      border: 0 none;
+      &:first-child {
+        padding: 0 48px 0 16px;
+        a {
+          font-size: 20px;
+          // font-weight: 400;
+          color: inherit;
+        }
+        &:before {
+          display: none;
+        }
+      }
+      &.m-card-sub-title {
+        margin-top: -8px;
+        padding: 0 48px 0 16px;
+        color: rgba(26, 26, 26, 0.54);
+      }
+    }
+
+    .has_label_on_mobile {
+      &:before {
+        content: attr(data-label);
+        display: inline;
+        font-weight: normal;
+      }
+    }
+
+    .mat-column-star {
+      width: auto;
+      padding: 8px 0 0 !important;
+      margin: 0;
+      position: absolute;
+      top: 0;
+      right: 0;
+      &:before {
+        display: none;
+      }
+    }
+  }
+
+  .mat-paginator {
+    margin-top: 24px;
+  }
+
+}
