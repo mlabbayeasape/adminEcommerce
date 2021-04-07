@@ -22,8 +22,6 @@ export class TableProduitsComponent implements OnInit, OnChanges {
   dataSource: MatTableDataSource<Product>;
   displayedColumns = ['idProduct','name','description','price','stock','star'];
 
-
-
   constructor(public dialog: MatDialog,
     private notificationService: NotificationService) {
   }
