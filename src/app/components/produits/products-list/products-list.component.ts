@@ -31,19 +31,15 @@ export class ProductsListComponent implements OnInit {
   products;
   productsSub;
 
-
   ngOnInit(): void {
 
-    this.productsSub = this.productServices.getProducts().subscribe(
-      (response: Response)=>{
+  this.productsSub = this.productServices.getProducts().subscribe(
+     (response: Response)=>{
         this.products = response.result;
       },
       (error)=>{console.log(error)},
     )
   }
-  // ngAfterViewInit(): void {
-  //   console.log("lesproduitsdufils:"+this.fils.dataSource); // affiche premier
-  //   }
 
 
   addProduct(): void{
@@ -55,19 +51,21 @@ export class ProductsListComponent implements OnInit {
       if (retour) {
         //AJOUT
         this.notificationService.success('Ajout effectué'+JSON.stringify(retour));
-        console.log(JSON.stringify(retour));
-        this.products.push(retour);
-        this.fils.onRafraichit();
+        retour.idProduct = 999
+        this.products.unshift(retour);
+
+        //******/
+        // ICI COMMENT ACTUALISER MA TABLE POUR AFFICHER LE PRODUIT AJOUTé ?????
+        //******/
+
+        // HTTP PUSH
         // this.productService.addProduct(retour).subscribe(
         //   (data) => {
         //     if(data.status == 200){
-        //       retour.idProduct = data.args.lastInsertId;
-
-        //       //this.fils.products = this.products;
-
         //     }
         //   }
         // )
+
       } else {
         this.notificationService.warn('Ajout annulé');
       }

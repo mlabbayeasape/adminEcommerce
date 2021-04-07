@@ -10,9 +10,7 @@
 <div class="example-container">
 
   <div class="example-table-container">
-    <table mat-table [dataSource]="dataSource" matSort>
-
-
+    <table #table mat-table [dataSource]="dataSource" matSort>
 
       <!-- Position Column -->
       <ng-container matColumnDef="idProduct">
