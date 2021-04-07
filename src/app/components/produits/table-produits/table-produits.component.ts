@@ -7,8 +7,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { AddOrEditProductModalComponent } from '../add-or-edit-product-modal/add-or-edit-product-modal.component';
 import { NotificationService } from 'src/app/services/notification.service';
 
-
-
 @Component({
   selector: 'app-table-produits',
   templateUrl: './table-produits.component.html',
