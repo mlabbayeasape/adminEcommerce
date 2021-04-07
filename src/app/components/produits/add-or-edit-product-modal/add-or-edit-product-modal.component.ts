@@ -116,7 +116,6 @@ export class AddOrEditProductModalComponent implements OnInit, OnDestroy {
 
   onChangeFileInput(event): void {
     this.file = event.target.files[0];
-
   }
 
 
