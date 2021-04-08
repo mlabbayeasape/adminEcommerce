@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit, Output,EventEmitter ,Inject, ViewChild} from '@angular/core';
+import { Component, Input, OnDestroy, OnInit, Output,EventEmitter ,Inject, ViewChild, OnChanges} from '@angular/core';
 import { FormBuilder, FormGroup, NG_VALUE_ACCESSOR, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
@@ -22,10 +22,12 @@ export class AddOrEditProductModalComponent implements OnInit, OnDestroy {
   fileInput;
   file: File | null = null;
 
+  oldImage: string;
+
   productForm: FormGroup; // initialise un formulaire
   categories: Category[];
   categorySub: Subscription;
-  selectedCategory: string;
+  selectedCategory: number;
 
   constructor(private fb: FormBuilder,
     public dialogRef: MatDialogRef<AddOrEditProductModalComponent>,
@@ -33,7 +35,7 @@ export class AddOrEditProductModalComponent implements OnInit, OnDestroy {
     @Inject(MAT_DIALOG_DATA) public data: Product) {
     this.productForm = fb.group({
       productCategory: fb.group({
-        category: [this.data.Category,Validators.required],
+        Category: [this.data.Category,Validators.required],
       }),
       productInfos: fb.group({
         name: [this.data.name,Validators.required],
@@ -54,8 +56,30 @@ export class AddOrEditProductModalComponent implements OnInit, OnDestroy {
         this.categories = reponse.result;
       }
     )
-    this.selectedCategory = this.data.Category;
+    this.selectCategory(this.data.Category);
   }
+
+  // ngOnChanges(): void{
+  //   console.log("onchanges");
+  //   if(this.data){
+  //     this.updateForm(this.data)
+  //   }
+  // }
+
+  // updateForm(product: Product){
+  //   console.log("onchanges");
+  //   this.productForm.patchValue({
+  //     productInfos:{
+  //       name: product.name,
+  //       description: product.description,
+  //       price: product.price,
+  //       stock: product.stock,
+  //     },
+  //     productCategory:{
+  //       Category: product.Category
+  //     }
+  //   })
+  // }
 
   onNoClick(): void {
     this.dialogRef.close();
@@ -65,14 +89,10 @@ export class AddOrEditProductModalComponent implements OnInit, OnDestroy {
     this.categorySub.unsubscribe();
   }
 
-  // idCategory = null;
-  // selectedCategory: number = null;
-  selectCategory(id: string) {
-    //this.data.Category = id;
-    // this.idCategory = id;
+
+  selectCategory(id: number) {
     this.selectedCategory = id;
-    //this.productForm.controls.productCategory.get('category').setValue(id);
-    // console.log(this.productForm.controls.productCategory.get('category').value);
+    this.productForm.get('productCategory').get('Category').setValue(id);
   }
 
   //** controle des formulaires **/
@@ -83,6 +103,9 @@ export class AddOrEditProductModalComponent implements OnInit, OnDestroy {
     return this.productForm.get('productInfos').invalid;
   }
   get isIllustrationInvalid(): boolean {
+    if(this.data){
+      return false;
+    }
     return this.productForm.get('illustration').invalid;
   }
 
@@ -103,11 +126,15 @@ export class AddOrEditProductModalComponent implements OnInit, OnDestroy {
       ...this.productForm.get('productInfos').value,
       ...this.productForm.get('illustration').value
     }
+    const leFile: File = this.file;
+
     if(this.file){
       product.image = this.file.name
     }
-    console.log("formvalue"+product);
-    this.dialogRef.close(product);
+
+    //this.dialogRef.close(product);
+
+    this.dialogRef.close({product:product,file:leFile})
   }
 
   onClickFileInputButton(): void {

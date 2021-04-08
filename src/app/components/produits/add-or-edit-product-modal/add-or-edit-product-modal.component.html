@@ -10,7 +10,7 @@
       <mat-step [stepControl]="productForm.get('productCategory')" errorMessage="*champ(s) manquant(s)">
         <ng-template matStepLabel>Categorie</ng-template>
         <div formGroupName="productCategory" class="lescategories">
-          <mat-radio-group  formControlName="category">
+          <mat-radio-group  formControlName="Category">
             <mat-radio-button *ngFor="let category of categories" [value]="category.idCategory" (change)="selectCategory(category.idCategory)">
               <mat-card [ngClass]="{'card-selected mat-elevation-z2': category.idCategory == selectedCategory}">
                 <span class="selection">
