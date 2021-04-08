@@ -120,6 +120,7 @@ export class PageProduitsComponent implements OnInit , AfterViewInit{
         // EDIT SERVEUR
         this.productServices.editProduct(this.productRetour).subscribe(
           (data: Response) => {
+            console.log("modif",data);
             if(data.status == 200){
               if(this.file){
                 // UPLOAD IMAGE
