@@ -41,9 +41,7 @@ export class PageProduitsComponent implements OnInit , AfterViewInit{
     ) { }
 
     ngOnInit(): void {
-      console.log(this.baseUrlImage);
-
-      }
+          }
 
       ngAfterViewInit() {
         this.productsSub = this.productServices.getProducts().subscribe(
@@ -52,7 +50,6 @@ export class PageProduitsComponent implements OnInit , AfterViewInit{
              this.dataSource = new MatTableDataSource(this.products);
              this.dataSource.paginator = this.paginator;
              this.productsSub.unsubscribe();
-             console.log(this.products)
            },
            (error)=>{console.log(error)},
          )
@@ -72,12 +69,10 @@ export class PageProduitsComponent implements OnInit , AfterViewInit{
     dialogRef.afterClosed().subscribe((retour) => {
       if (retour) {
         this.productRetour = retour.product;
-        console.log(this.productRetour)
         this.file = retour.file;
         // HTTP PUSH
         this.productServices.addProduct(this.productRetour).subscribe(
           (data) => {
-            console.log(data);
             if(data.status == 200){
               this.productRetour.idProduct = data.args.lastInsertId;
               if(this.file){
@@ -110,7 +105,7 @@ export class PageProduitsComponent implements OnInit , AfterViewInit{
 
   editProduct(leProduit: Product): void{
     let dialogRef = this.dialog.open(AddOrEditProductModalComponent, {
-      width: '80%',
+      width: '800px',
       data: leProduit
     });
     dialogRef.afterClosed().subscribe((retour) => {
@@ -122,11 +117,9 @@ export class PageProduitsComponent implements OnInit , AfterViewInit{
         // EDIT SERVEUR
         this.productServices.editProduct(this.productRetour).subscribe(
           (data: Response) => {
-            console.log("modif",data);
             if(data.status == 200){
               if(this.file){
                 // upload NEW image
-                console.log("IMAAAAAGE UPLOAD");
                 this.fileService.uploadImage(this.file).subscribe(
                   (event: HttpEvent<any>) => {
                       this.uploadImage(event).then(
@@ -137,7 +130,6 @@ export class PageProduitsComponent implements OnInit , AfterViewInit{
                   }
                 )
                 // delete OLD image
-                console.log(leProduit);
                 this.fileService.deleteImage(leProduit.image).subscribe(
                   (data: Response) => {
                     console.log(data);
@@ -146,14 +138,15 @@ export class PageProduitsComponent implements OnInit , AfterViewInit{
               } else {
                 this.majIHM_edit(this.productRetour)
               }
-
+              this.notificationService.success('Modification effectuée avec succès');
 
             }else{
               console.log(data.message);
+              this.notificationService.warn('Une erreur est survenue lors de la modification');
             }
           }
         )
-        this.notificationService.success('Modification effectuée avec succès');
+
       }
     }
     );
@@ -186,15 +179,30 @@ export class PageProduitsComponent implements OnInit , AfterViewInit{
 
 deleteProduct(leProduit: Product): void{
   let dialogRef = this.dialog.open(DeleteProductModalComponent, {
-    width: '80%',
+    width: '400px',
     data: leProduit
   });
   dialogRef.afterClosed().subscribe((retour) => {
-
+    if (retour && retour.confirmation === true) {
+      this.productServices.deleteProduct(leProduit).subscribe(
+        (reponseHttp: Response) => {
+          if (reponseHttp.status == 200){
+            console.log(reponseHttp.result);
+            this.fileService.deleteImage(leProduit.image).subscribe(
+              (reponseHttp: Response) => {
+                console.log(reponseHttp);
+                this.majIHM_delete(leProduit);
+              }
+            )
+            this.notificationService.success("Supression effectuée avec succès");
+          } else {
+            this.notificationService.warn("Erreur lors de la suppression");
+          }
+        }
+      )
   }
-  );
+});
 }
-
 
 
         majIHM_add(product: Product){
@@ -211,6 +219,13 @@ deleteProduct(leProduit: Product): void{
            this.dataSource.data = this.products;
         }
 
-
+        majIHM_delete(product: Product){
+          /*** maj IHM ***/
+          const index = this.products.findIndex(p => p.idProduct == product.idProduct)
+          //delete this.products[index]
+          this.products.splice(index,1);
+          this.dataSource.data = this.products;
+          this.notificationService.success('Suppression effectuée avec succès');
+        }
 
 }

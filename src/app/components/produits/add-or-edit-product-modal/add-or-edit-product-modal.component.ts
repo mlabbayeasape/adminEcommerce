@@ -59,28 +59,6 @@ export class AddOrEditProductModalComponent implements OnInit, OnDestroy {
     this.selectCategory(this.data.Category);
   }
 
-  // ngOnChanges(): void{
-  //   console.log("onchanges");
-  //   if(this.data){
-  //     this.updateForm(this.data)
-  //   }
-  // }
-
-  // updateForm(product: Product){
-  //   console.log("onchanges");
-  //   this.productForm.patchValue({
-  //     productInfos:{
-  //       name: product.name,
-  //       description: product.description,
-  //       price: product.price,
-  //       stock: product.stock,
-  //     },
-  //     productCategory:{
-  //       Category: product.Category
-  //     }
-  //   })
-  // }
-
   onNoClick(): void {
     this.dialogRef.close();
   }

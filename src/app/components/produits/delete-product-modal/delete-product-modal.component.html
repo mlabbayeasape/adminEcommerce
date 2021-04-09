@@ -1,10 +1,13 @@
 <h1 mat-dialog-title>Supprimer</h1>
 
 <div mat-dialog-content>
-  Souhaitez-vous supprimer le produit ?
-  {{data | json}}
+  Souhaitez-vous supprimer le produit ?<br>
+  <!-- Id: {{data.idProduct}} -->
+  <h3>{{data.name}}</h3><br>
+  <img class="imgproduct" [src]="baseUrlImage+data.image" onerror="this.style.display='none'"><br>
+
 </div>
-<div mat-dialog-actions>
+<div mat-dialog-actions align="center">
   <button mat-raised-button (click)="cancelDelete()">Annuler</button>
   <button mat-raised-button color="warn" (click)="confirmDelete()">Supprimer</button>
 </div>

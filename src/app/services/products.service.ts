@@ -11,6 +11,7 @@ import { Response } from '../models/response';
 export class ProductsService {
   private baseUrl = `${environment.api+'products'+'?API_KEY='+environment.api_key}`;
   private baseUrlUpdate =  `${environment.api+'updateProducts.php'+'?API_KEY='+environment.api_key}`;
+  private baseUrlDelete =  `${environment.api+'deleteProducts.php'+'?API_KEY='+environment.api_key}`;
   constructor(private http: HttpClient) { }
 
 
@@ -32,6 +33,11 @@ export class ProductsService {
   editProduct(product: Product): Observable<Response>{
     const url = this.baseUrlUpdate+this.constructURLParams(product);
      return this.http.get<Response>(url);
+  }
+
+  deleteProduct(product: Product): Observable<Response>{
+    const url = this.baseUrlDelete+"&id="+product.idProduct;
+    return this.http.get<Response>(url);
   }
 
   constructURLParams = (object) => {
