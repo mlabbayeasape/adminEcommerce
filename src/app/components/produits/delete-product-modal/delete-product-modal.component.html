@@ -1,1 +1,10 @@
-<p>delete-product-modal works!</p>
+<h1 mat-dialog-title>Supprimer</h1>
+
+<div mat-dialog-content>
+  Souhaitez-vous supprimer le produit ?
+  {{data | json}}
+</div>
+<div mat-dialog-actions>
+  <button mat-raised-button (click)="cancelDelete()">Annuler</button>
+  <button mat-raised-button color="warn" (click)="confirmDelete()">Supprimer</button>
+</div>

@@ -8,7 +8,7 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class FileUploadService {
-
+  private baseUrl = `${environment.api+'image'+'?API_KEY='+environment.api_key}`;
   private baseUrlUpload = `${environment.api+'uploadImage.php'+'?API_KEY='+environment.api_key}`;
   private baseUrlDelete = `${environment.api+'deleteImage.php'+'?API_KEY='+environment.api_key}`;
 
@@ -26,6 +26,7 @@ export class FileUploadService {
   deleteImage(name: string):Observable<any>{
     let formData: any = new FormData();
     formData.append("name", name);
+    console.log(this.baseUrlDelete);
     return this.http.delete(this.baseUrlDelete, formData);
   }
 

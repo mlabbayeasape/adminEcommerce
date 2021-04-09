@@ -22,8 +22,8 @@ export class ProductsService {
     let params = new FormData();
     params.append('name',product.name);
     params.append('description',product.description);
-     params.append('price',`${product.price}`);
-     params.append('stock',`${product.stock}`);
+    params.append('price',`${product.price}`);
+    params.append('stock',`${product.stock}`);
     params.append('category',`${product.Category}`);
     params.append('image',product.image);
     return this.http.post<Response>(this.baseUrl, params);
@@ -36,10 +36,14 @@ export class ProductsService {
 
   constructURLParams = (object) => {
     let result = '';
-    for (const property in Object) {
-       result += `&${property}=${object[property]}`;
+    for (const property in object) {
+      if (property == 'Category') {
+       result += `&category=${object[property]}`;
+      }else{
+        result += `&${property}=${object[property]}`;
+      };
     }
-    return result;
+    return encodeURI(result);
   }
 
 }

@@ -10,6 +10,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { FileUploadService } from 'src/app/services/file-upload.service';
 import { HttpEvent, HttpEventType } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import { DeleteProductModalComponent } from '../delete-product-modal/delete-product-modal.component';
 
 
 @Component({
@@ -32,6 +33,7 @@ export class PageProduitsComponent implements OnInit , AfterViewInit{
   baseUrlImage = `${environment.api_image}`;
 
 
+
   constructor(private productServices: ProductsService,
     public dialog: MatDialog,
     private notificationService: NotificationService,
@@ -39,7 +41,7 @@ export class PageProduitsComponent implements OnInit , AfterViewInit{
     ) { }
 
     ngOnInit(): void {
-
+      console.log(this.baseUrlImage);
 
       }
 
@@ -69,29 +71,31 @@ export class PageProduitsComponent implements OnInit , AfterViewInit{
     });
     dialogRef.afterClosed().subscribe((retour) => {
       if (retour) {
-
-
         this.productRetour = retour.product;
         console.log(this.productRetour)
         this.file = retour.file;
-
         // HTTP PUSH
         this.productServices.addProduct(this.productRetour).subscribe(
           (data) => {
             console.log(data);
             if(data.status == 200){
+              this.productRetour.idProduct = data.args.lastInsertId;
               if(this.file){
                 // UPLOAD IMAGE
                 this.fileService.uploadImage(this.file).subscribe(
                   (event: HttpEvent<any>) => {
-                      this.uploadImage(event)
+                    this.uploadImage(event).then(
+                      ()=>{
+                         /*** maj IHM ***/
+                         this.majIHM_add(this.productRetour)
+                      }
+                    )
                   }
                 )
+              } else {
+                this.majIHM_add(this.productRetour)
               }
-              this.productRetour.idProduct = data.args.lastInsertId
-              this.products.push(this.productRetour);
-              this.dataSource.data = this.products;
-              this.notificationService.success('Ajout effectué'+JSON.stringify(retour));
+
             }
             else{
               this.notificationService.warn("Erreur lors de l'ajout");
@@ -99,8 +103,6 @@ export class PageProduitsComponent implements OnInit , AfterViewInit{
           }
         )
 
-      } else {
-        this.notificationService.warn('Ajout annulé');
       }
     }
     )
@@ -108,7 +110,7 @@ export class PageProduitsComponent implements OnInit , AfterViewInit{
 
   editProduct(leProduit: Product): void{
     let dialogRef = this.dialog.open(AddOrEditProductModalComponent, {
-      width: '800px',
+      width: '80%',
       data: leProduit
     });
     dialogRef.afterClosed().subscribe((retour) => {
@@ -123,57 +125,92 @@ export class PageProduitsComponent implements OnInit , AfterViewInit{
             console.log("modif",data);
             if(data.status == 200){
               if(this.file){
-                // UPLOAD IMAGE
+                // upload NEW image
+                console.log("IMAAAAAGE UPLOAD");
                 this.fileService.uploadImage(this.file).subscribe(
                   (event: HttpEvent<any>) => {
-                      this.uploadImage(event)
+                      this.uploadImage(event).then(
+                        ()=>{
+                            this.majIHM_edit(this.productRetour)
+                        }
+                      )
                   }
                 )
+                // delete OLD image
+                console.log(leProduit);
                 this.fileService.deleteImage(leProduit.image).subscribe(
                   (data: Response) => {
                     console.log(data);
                   }
-                ) // on supprime l'ancienne image
+                )
+              } else {
+                this.majIHM_edit(this.productRetour)
               }
 
-              const index = this.products.findIndex(p => p.idProduct == leProduit.idProduct)
-              this.products[index] = this.productRetour;
-              // this.products = [
-              //   ...this.products.slice(0,index),
-              //   this.productRetour,
-              //   ...this.products.slice(index+1)
 
-              // ]
             }else{
               console.log(data.message);
             }
           }
         )
-        console.log(this.productRetour);
-        this.notificationService.success('Modification effectuée'+JSON.stringify(retour));
-      } else {
-        this.notificationService.success('Modification annulée');
+        this.notificationService.success('Modification effectuée avec succès');
       }
     }
     );
   }
 
   uploadImage(event){
-          switch(event.type) {
-                  case HttpEventType.Sent:
-                        console.log("requete envoyée avec succes");
-                        break;
-                      case HttpEventType.UploadProgress:
-                        this.progress = Math.round(event.loaded / event.total * 100)
-                        break;
-                      case HttpEventType.Response:
-                        console.log(event.body);
-                        setTimeout(() => {
-                          this.progress = 0
-                        }, 1500);
-                        break;
+        return new Promise(
+          (resolve, reject) => {
+            switch(event.type) {
+              case HttpEventType.Sent:
+                    console.log("requete envoyée avec succes");
+                    break;
+                  case HttpEventType.UploadProgress:
+                    this.progress = Math.round(event.loaded / event.total * 100);
+                    if(this.progress == 100){
+                      resolve(true);
                     }
-                  }
+                    break;
+                  case HttpEventType.Response:
+                    console.log(event.body);
+                    setTimeout(() => {
+                      this.progress = 0
+                    }, 1500);
+                    break;
+                }
+              }
+          )
+        }
+
+
+deleteProduct(leProduit: Product): void{
+  let dialogRef = this.dialog.open(DeleteProductModalComponent, {
+    width: '80%',
+    data: leProduit
+  });
+  dialogRef.afterClosed().subscribe((retour) => {
+
+  }
+  );
+}
+
+
+
+        majIHM_add(product: Product){
+          /*** maj IHM ***/
+          this.products.push(product);
+          this.dataSource.data = this.products;
+          this.notificationService.success('Ajout effectué avec succès');
+        }
+
+        majIHM_edit(product: Product){
+           //*** MAJ IHM ***/
+           const index = this.products.findIndex(p => p.idProduct == product.idProduct)
+           this.products[index] = product;
+           this.dataSource.data = this.products;
+        }
+
 
 
 }
