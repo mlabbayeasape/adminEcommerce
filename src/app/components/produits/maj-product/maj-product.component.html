@@ -1,0 +1,72 @@
+
+
+<h1 mat-dialog-title>{{ data ? 'Edit' : 'Add Product' }}</h1>
+{{data.name}}
+<div mat-dialog-content>
+  <form [formGroup]="productForm">
+        <div formGroupName="productCategory" class="lescategories">
+          <mat-radio-group  formControlName="Category">
+            <mat-radio-button *ngFor="let category of categories" [value]="category.idCategory" (change)="selectCategory(category.idCategory)">
+              <mat-card [ngClass]="{'card-selected mat-elevation-z2': category.idCategory == selectedCategory}">
+                <span class="selection">
+                  <mat-icon>check_circle</mat-icon>
+                </span>
+                {{category.name}} - {{category.idCategory}}
+              </mat-card>
+            </mat-radio-button>
+          </mat-radio-group>
+    </div>
+
+     <!-- STEP Informations -->
+        <div formGroupName="productInfos" class="productInfos">
+          <mat-form-field appearance="outline">
+            <mat-label>Libellé</mat-label>
+            <input matInput formControlName="name">
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Prix</mat-label>
+            <input matInput formControlName="price">
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Stock</mat-label>
+            <input matInput formControlName="stock">
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Description</mat-label>
+            <textarea matInput formControlName="description"></textarea>
+          </mat-form-field>
+
+      </div>
+
+      <div formGroupName="illustration" class="productInfos">
+         <div class="container">
+          <input type="file"  formControlName="image" style="display: none" #fileInput accept="image" (change)="onChangeFileInput($event)" />
+          <button mat-raised-button color="primary" class="file-select-button" (click)="onClickFileInputButton()">
+            <mat-icon>attach_file</mat-icon>
+            Choisir un fichier...
+          </button>
+
+          <p class="file-name" *ngIf="!file; else fileName">Aucun fichier choisi</p>
+          <ng-template #fileName>
+            <p class="file-name">{{ file?.name }}</p>
+          </ng-template>
+        </div>
+
+
+    </div>
+
+
+  </form>
+</div>
+<div mat-dialog-actions align="end">
+  <button mat-raised-button color="warn" (click)="handleCancel()">Annuler</button>
+  <button mat-raised-button color="primary" [disabled]="!productForm.valid" (click)="handleFinish()">Valider</button>
+</div>
+
+
+
+
+
+
+
+

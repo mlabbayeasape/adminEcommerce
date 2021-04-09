@@ -16,19 +16,18 @@
       <!-- Position Column -->
       <ng-container matColumnDef="idProduct">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Code </th>
-        <td mat-cell *matCellDef="let element" class='m-card-title' test data-label='Code'>
-          {{element.idProduct}}</td>
+        <td mat-cell *matCellDef="let element" class='has_label_on_mobile' data-label='Code : '>{{element.idProduct}}</td>
       </ng-container>
 
       <!-- Name Column -->
       <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Form type </th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Libellé </th>
         <td mat-cell *matCellDef="let element" class='m-card-title' data-label='Libellé'>
           <a href='javascript:alert("page article");'>{{element.name}} </a></td>
       </ng-container>
       <!-- description Column -->
       <ng-container matColumnDef="description">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Description </th>
+        <th mat-header-cell *matHeaderCellDef> Description </th>
         <td mat-cell *matCellDef="let element" class='m-card-sub-title' data-label='Description'>{{element.description}} </td>
       </ng-container>
        <!-- Price Column -->

@@ -9,15 +9,12 @@ mat-paginator{
   background-color:#F0F0F0;
 }
 
-.example-container{
+
+.mat-table {
   background-color: white;
-  border-radius: 8px;
-
-}
-
-table {
-  background-color: transparent;
   width: 100%;
+  border: 1px solid lightgray;
+
   .mat-icon{
     color: #4391AC;
   }
@@ -83,6 +80,8 @@ width: auto;
 
   .mat-table {
     background: transparent;
+    border: 0px solid lightgray;
+
     * {
       box-sizing: border-box;
     }

@@ -1,0 +1,58 @@
+.productInfos{
+  display: flex;
+  flex-direction: column;
+  column-gap: 10px;
+  margin: 10px;
+}
+
+.file-select-button, .file-name {
+  display: inline-block;
+  margin: 8px;
+}
+
+.illustration{
+  display: flex;
+  flex-direction: row;
+  margin: 10px;
+}
+
+.lescategories{
+  display: inline-flex;
+  flex-flow: row wrap;
+  /* column-gap: 10px;
+  row-gap: 10px; */
+  margin: 10px;
+}
+mat-card{
+  margin: 10px;
+  border: 2px solid transparent;
+  border-radius: 4px;
+  cursor: pointer;
+}
+:host ::ng-deep .mat-radio-container {
+  display: none;
+}
+
+mat-card:hover {
+  opacity: 1;
+  border: 2px solid #283593;
+}
+mat-card.mat-elevation-z2 .selection {
+  opacity: 1;
+}
+.card-selected {
+  border: 2px solid #283593;
+}
+
+.selection {
+  opacity: 0;
+  cursor: pointer;
+  color: #283593;
+  background: #fff;
+  position: absolute;
+  right:-10px;
+  top:-10px;
+  border-radius: 100%;
+  height: 24px;
+  width: 24px;
+}

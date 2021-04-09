@@ -11,6 +11,8 @@ import { FileUploadService } from 'src/app/services/file-upload.service';
 import { HttpEvent, HttpEventType } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { DeleteProductModalComponent } from '../delete-product-modal/delete-product-modal.component';
+import { MatSort } from '@angular/material/sort';
+import { MajProductComponent } from '../maj-product/maj-product.component';
 
 
 @Component({
@@ -20,10 +22,13 @@ import { DeleteProductModalComponent } from '../delete-product-modal/delete-prod
 })
 export class PageProduitsComponent implements OnInit , AfterViewInit{
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
+
 
   dataSource: MatTableDataSource<Product>;
   displayedColumns = ['idProduct','name','description','price','stock','image','star'];
+
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
 
   productRetour: Product;
   products;
@@ -48,7 +53,9 @@ export class PageProduitsComponent implements OnInit , AfterViewInit{
           (response: Response)=>{
              this.products = response.result;
              this.dataSource = new MatTableDataSource(this.products);
+             this.dataSource.sort = this.sort;
              this.dataSource.paginator = this.paginator;
+
              this.productsSub.unsubscribe();
            },
            (error)=>{console.log(error)},
@@ -104,8 +111,8 @@ export class PageProduitsComponent implements OnInit , AfterViewInit{
   }
 
   editProduct(leProduit: Product): void{
-    let dialogRef = this.dialog.open(AddOrEditProductModalComponent, {
-      width: '800px',
+    let dialogRef = this.dialog.open(MajProductComponent, {
+      width: '80%',
       data: leProduit
     });
     dialogRef.afterClosed().subscribe((retour) => {

@@ -25,6 +25,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
+
 import { TableProduitsComponent } from './components/produits/table-produits/table-produits.component';
 import {MatDialogModule} from '@angular/material/dialog';
 
@@ -37,11 +38,10 @@ import { ReactiveFormsModule } from '@angular/forms';
 import {MatCardModule} from '@angular/material/card';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
-import { ParentComponent } from './components/test/parent/parent.component';
-import { ChildComponent } from './components/test/child/child.component';
 import { PageProduitsComponent } from './components/produits/page-produits/page-produits.component';
-
-
+import {MatRippleModule} from '@angular/material/core';
+import { MajProductComponent } from './components/produits/maj-product/maj-product.component';
+import {MatTabsModule} from '@angular/material/tabs';
 
 @NgModule({
   declarations: [
@@ -52,9 +52,8 @@ import { PageProduitsComponent } from './components/produits/page-produits/page-
     NavigationComponent,
     ProductsListComponent,
     TableProduitsComponent,
-    ParentComponent,
-    ChildComponent,
     PageProduitsComponent,
+    MajProductComponent,
   ],
   imports: [
     BrowserModule,
@@ -81,6 +80,8 @@ import { PageProduitsComponent } from './components/produits/page-produits/page-
     MatCardModule,
     MatRadioModule,
     MatSnackBarModule,
+    MatRippleModule,
+    MatTabsModule,
 
   ],
   exports: [
