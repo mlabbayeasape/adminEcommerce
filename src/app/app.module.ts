@@ -42,6 +42,8 @@ import { PageProduitsComponent } from './components/produits/page-produits/page-
 import {MatRippleModule} from '@angular/material/core';
 import { MajProductComponent } from './components/produits/maj-product/maj-product.component';
 import {MatTabsModule} from '@angular/material/tabs';
+import { FicheProduitComponent } from './components/produits/fiche-produit/fiche-produit.component';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -54,6 +56,7 @@ import {MatTabsModule} from '@angular/material/tabs';
     TableProduitsComponent,
     PageProduitsComponent,
     MajProductComponent,
+    FicheProduitComponent,
   ],
   imports: [
     BrowserModule,
@@ -82,6 +85,7 @@ import {MatTabsModule} from '@angular/material/tabs';
     MatSnackBarModule,
     MatRippleModule,
     MatTabsModule,
+    MatProgressSpinnerModule,
 
   ],
   exports: [

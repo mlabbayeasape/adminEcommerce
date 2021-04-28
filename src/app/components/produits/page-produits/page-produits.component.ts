@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Product } from 'src/app/models/product';
 import { AddOrEditProductModalComponent } from '../add-or-edit-product-modal/add-or-edit-product-modal.component';
 import { Response } from 'src/app/models/response';
@@ -20,7 +20,7 @@ import { MajProductComponent } from '../maj-product/maj-product.component';
   templateUrl: './page-produits.component.html',
   styleUrls: ['./page-produits.component.scss']
 })
-export class PageProduitsComponent implements OnInit , AfterViewInit{
+export class PageProduitsComponent implements OnInit , AfterViewInit, OnDestroy{
 
 
 
@@ -36,7 +36,7 @@ export class PageProduitsComponent implements OnInit , AfterViewInit{
   file: File;
   progress = 0;
   baseUrlImage = `${environment.api_image}`;
-
+  isLoading: boolean = false;
 
 
   constructor(private productServices: ProductsService,
@@ -49,22 +49,23 @@ export class PageProduitsComponent implements OnInit , AfterViewInit{
           }
 
       ngAfterViewInit() {
+        this.isLoading = true;
         this.productsSub = this.productServices.getProducts().subscribe(
           (response: Response)=>{
              this.products = response.result;
              this.dataSource = new MatTableDataSource(this.products);
              this.dataSource.sort = this.sort;
              this.dataSource.paginator = this.paginator;
-
-             this.productsSub.unsubscribe();
+             this.isLoading = false;
            },
-           (error)=>{console.log(error)},
+           (error)=>{console.log(error); this.isLoading = false;},
          )
       }
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
+    this.isLoading = false;
   }
 
 
@@ -234,5 +235,10 @@ deleteProduct(leProduit: Product): void{
           this.dataSource.data = this.products;
           this.notificationService.success('Suppression effectuée avec succès');
         }
+
+
+    ngOnDestroy(){
+      this.productsSub.unsubscribe();
+    }
 
 }

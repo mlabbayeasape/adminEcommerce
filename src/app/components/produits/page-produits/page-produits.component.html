@@ -4,7 +4,9 @@
   <button mat-mini-fab color="primary" (click)="addProduct()"><mat-icon>add</mat-icon></button>
 </div>
 
-<div class="div-contenu">
+<mat-spinner *ngIf="isLoading"></mat-spinner>
+
+<div class="div-contenu" *ngIf="!isLoading">
 <mat-form-field appearance="outline">
   <mat-label>Recherche</mat-label>
   <input matInput (keyup)="applyFilter($event)" #input>
@@ -23,7 +25,7 @@
       <ng-container matColumnDef="name">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Libellé </th>
         <td mat-cell *matCellDef="let element" class='m-card-title' data-label='Libellé'>
-          <a href='javascript:alert("page article");'>{{element.name}} </a></td>
+          <a [routerLink]="['/fiche-produit', element.idProduct]">{{element.name}} </a></td>
       </ng-container>
       <!-- description Column -->
       <ng-container matColumnDef="description">
